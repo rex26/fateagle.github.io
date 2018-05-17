@@ -103,6 +103,12 @@
 </blockquote>
 <h3 id="返回按钮监听-然后判断页面是否在前台"><a href="#返回按钮监听-然后判断页面是否在前台" class="headerlink" title="返回按钮监听,然后判断页面是否在前台"></a>返回按钮监听,然后判断页面是否在前台</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">componentDidMount() &#123;</span><br><span class="line">  if (Platform.OS === &quot;android&quot;)</span><br><span class="line">    BackHandler.addEventListener(&quot;hardwareBackPress&quot;, this.handleBack);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">componentWillUnmount() &#123;</span><br><span class="line">  if (Platform.OS === &quot;android&quot;)</span><br><span class="line">    BackHandler.removeEventListener(&quot;hardwareBackPress&quot;, this.handleBack);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">handleBack = () =&gt; &#123;</span><br><span class="line">  if (this.props.navigation.isFocused()) &#123;// isFocused()是react navigation的方法</span><br><span class="line">    alert(&quot;我在主页你知道吗?&quot;);</span><br><span class="line">    var timestamp = new Date().valueOf();</span><br><span class="line">    if (timestamp - firstClick &gt; 2000) &#123;</span><br><span class="line">      firstClick = timestamp;</span><br><span class="line">      ToastAndroid.show(&quot;再按一次退出&quot;, ToastAndroid.SHORT);</span><br><span class="line">      return true;</span><br><span class="line">    &#125;</span><br><span class="line">    BackHandler.exitApp();</span><br><span class="line">    return false;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  return false;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <h3 id="安装NativeBase-后复制theme"><a href="#安装NativeBase-后复制theme" class="headerlink" title="安装NativeBase 后复制theme"></a>安装NativeBase 后复制theme</h3><p>NativeBase 2.0 has been succesfully installed!<br>Run <code>node node_modules/native-base/ejectTheme.js</code> to copy over theme config and variables.<br>Head over to the docs for detailed information on how to make changes to the theme.   </p>
+<h3 id="Configuration-with-name-‘default’-not-found"><a href="#Configuration-with-name-‘default’-not-found" class="headerlink" title="Configuration with name ‘default’ not found."></a>Configuration with name ‘default’ not found.</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">FAILURE: Build failed with an exception.</span><br><span class="line"></span><br><span class="line">- What went wrong:</span><br><span class="line">  A problem occurred configuring project &apos;:app&apos;.</span><br><span class="line"></span><br><span class="line">Could not resolve all dependencies for configuration &apos;:app:_debugApk&apos;.</span><br><span class="line"></span><br><span class="line">Configuration with name &apos;default&apos; not found.</span><br></pre></td></tr></table></figure>
+<p>我遇到的问题场景是: setting.gradle include的项目,没有在Android视图展示出来,也就是Android studio找不到这些项目</p>
+<blockquote>
+<p>npm i</p>
+<p>react-native run-android</p>
+</blockquote>
 	  
 
 	  <div>
@@ -117,6 +123,18 @@
 	
 		
 			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
 			
 		
 	
@@ -146,11 +164,11 @@
 	
 	
 	
-		<li class="prev disabled"><a><i class="fa fa-arrow-circle-o-left"></i>prev</a></li>
+		<li class="prev"><a href="/2018/05/17/git-problems/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>prev</a></li>
 	
 	<li><a href="/"><i class="fa fa-archive"></i>Home</a></li>
 	
-		<li class="next"><a href="/2018/02/05/android-studio-shortcuts/" class="alignright next">next<i class="fa fa-arrow-circle-o-right"></i></a></li>
+		<li class="next"><a href="/2018/02/05/big-things/" class="alignright next">next<i class="fa fa-arrow-circle-o-right"></i></a></li>
 	
 </ul>
 </div>
