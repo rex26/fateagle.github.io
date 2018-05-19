@@ -1,0 +1,304 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>ubuntu problems collection | Rex的博客</title>
+  <meta name="author" content="rex">
+  
+  <meta name="description" content="一.修改启动失败的问题1./etc/default/grub quiet splash 后面加上 nomodeset2.sudo update-grub3.GRUB_DEFAULT=0  默认启动项，下标从0开始，0一般是ubuntu
+二。修改默认分辨率命令$ cvt 1920 1080
+
+1920">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="ubuntu problems collection"/>
+  <meta property="og:site_name" content="Rex的博客"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="Rex的博客" type="application/atom+xml">
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">  
+  <link rel="stylesheet" href="/css/sidenav.css" media="screen" type="text/css">  
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+
+</head>
+
+<body id="body" data-spy="scroll" data-target=".toc">
+  <div class="container" id="container">
+	<div class="content">
+	  <div class="page-header">		
+  <h1><a class="brand" href="/">Rex的博客</a><span class="split"></span><span class="title">ubuntu problems collection</span><span class="date" id="title-date"><i class="fa fa-clock-o"></i> 2018-05-19</span></h1>
+</div>		
+
+<div class="row page">
+  <!-- cols -->	
+  
+  
+
+  
+	<div class="col-md-12">
+	  
+
+	  <!-- content -->
+	  <h4 id="一-修改启动失败的问题"><a href="#一-修改启动失败的问题" class="headerlink" title="一.修改启动失败的问题"></a>一.修改启动失败的问题</h4><p>1./etc/default/grub quiet splash 后面加上 nomodeset<br>2.sudo update-grub<br>3.GRUB_DEFAULT=0  默认启动项，下标从0开始，0一般是ubuntu</p>
+<h4 id="二。修改默认分辨率"><a href="#二。修改默认分辨率" class="headerlink" title="二。修改默认分辨率"></a>二。修改默认分辨率</h4><p>命令$ cvt 1920 1080</p>
+<blockquote>
+<p>1920x1080 59.96 Hz (CVT 2.07M9) hsync: 67.16 kHz; pclk: 173.00 MHz</p>
+</blockquote>
+<p>Modeline “1920x1080_60.00”  173.00  1920 2048 2248 2576  1080 1083 1088 1120 -hsync +vsync</p>
+<p>命令$ xrandr –newmode “1920x1080_60.00”  173.00  1920 2048 2248 2576  1080 1083 1088 1120 -hsync +vsync</p>
+<p>命令$ sudo xrandr –addmode default 1920x1080_60.00<br>命令$ sudo xrandr –output default –mode 1440x900</p>
+<h4 id="壹-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-解决分辨率的问题"><a href="#壹-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-解决分辨率的问题" class="headerlink" title="壹&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;解决分辨率的问题"></a>壹&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;解决分辨率的问题</h4><p>用到的命令有：<br>    lspci -vnn | grep VGA -A 12<br>    lshw -C display</p>
+<p>网上到帖子一：<br>Ubuntu16.04分辨率过低，无法调高<br><a href="http://blog.csdn.net/XinyanH/article/details/78330853" target="_blank" rel="noopener">http://blog.csdn.net/XinyanH/article/details/78330853</a><br>1.用sudo lshw -c video查看<br>正常的显示应该是：<br><em>-display<br>       description: VGA compatible controller<br>       product: Cedar [Radeon HD 7350/8350 / R5 220]<br>       ……….此处省略一万字<br>而我的显示的是display UNCLAIMED：
+</em>-display UNCLAIMED<br>       description: 3D controller<br>       product: GM107M [GeForce GTX 950M]<br>       vendor: NVIDIA Corporation<br>    ……….此处省略一万字</p>
+<p>2.用sudo lshw -c video | grep configuration查看<br>rex@rex:/usr/java$ sudo lshw -c video | grep configuration<br>       configuration: latency=0<br>       configuration: latency=0<br>结论：没有显示驱动，所以应该是驱动出了问题，需要安装驱动</p>
+<p>3.AMD显卡，可能解决的路径：<br>安装方法为（<a href="http://support.amd.com/en-us/kb-articles/Pages/AMDGPU-PRO-Install.aspx），在该网页中，安装前需要运行如下命令：" target="_blank" rel="noopener">http://support.amd.com/en-us/kb-articles/Pages/AMDGPU-PRO-Install.aspx），在该网页中，安装前需要运行如下命令：</a><br>    sudo apt update<br>    sudo apt dist-upgrade<br>    sudo reboot</p>
+<h4 id="贰-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-我的是N卡，官网为：http-www-nvidia-cn"><a href="#贰-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-我的是N卡，官网为：http-www-nvidia-cn" class="headerlink" title="贰&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;我的是N卡，官网为：http://www.nvidia.cn"></a>贰&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;我的是N卡，官网为：<a href="http://www.nvidia.cn" target="_blank" rel="noopener">http://www.nvidia.cn</a></h4><p>​      然后找到地址：<a href="https://www.geforce.cn/drivers--这个页面有“自动检测GPU”的按钮" target="_blank" rel="noopener">https://www.geforce.cn/drivers--这个页面有“自动检测GPU”的按钮</a><br>      ！但是需要安装java</p>
+<h4 id="叁-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-安装java（但下载到的是rpm包）"><a href="#叁-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-安装java（但下载到的是rpm包）" class="headerlink" title="叁&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;安装java（但下载到的是rpm包）"></a>叁&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;安装java（但下载到的是rpm包）</h4><p>​    简单来说，Ubuntu的软件包格式是deb，如果要安装rpm的包，则要先用alien把rpm转换成deb。<br>    sudo apt-get install alien #alien默认没有安装，所以首先要安装它<br>    sudo alien xxxx.rpm #将rpm转换位deb，完成后会生成一个同名的xxxx.deb<br>    sudo dpkg -i xxxx.deb #安装</p>
+<h4 id="肆-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-解压-如果下载到的是tar-gz-："><a href="#肆-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-解压-如果下载到的是tar-gz-：" class="headerlink" title="肆&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;解压(如果下载到的是tar.gz)："></a>肆&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;解压(如果下载到的是tar.gz)：</h4><ul>
+<li>ZIP</li>
+</ul>
+<p>​    zip可能是目前使用得最多的文档压缩格式。它最大的优点就是在不同的操作系统平台，比如Linux， Windows以及Mac OS，上使用。缺点就是支持的压缩率不是很高，而tar.gz和tar.gz2在压缩率方面做得非常好。闲话少说，我们步入正题吧：<br>我们可以使用下列的命令压缩一个目录：</p>
+<blockquote>
+<p>zip -r archive_name.zip directory_to_compress</p>
+</blockquote>
+<p>下面是如果解压一个zip文档：</p>
+<blockquote>
+<p>unzip archive_name.zip</p>
+</blockquote>
+<ul>
+<li>TAR</li>
+</ul>
+<p>​    Tar是在Linux中使用得非常广泛的文档打包格式。它的好处就是它只消耗非常少的CPU以及时间去打包文件，他仅仅只是一个打包工具，并不负责压缩。下面是如何打包一个目录：</p>
+<blockquote>
+<p>tar -cvf archive_name.tar directory_to_compress</p>
+</blockquote>
+<p>如何解包：</p>
+<blockquote>
+<p>tar -xvf archive_name.tar.gz</p>
+</blockquote>
+<p>上面这个解包命令将会将文档解开在当前目录下面。当然，你也可以用这个命令来捏住解包的路径：</p>
+<blockquote>
+<p>tar -xvf archive_name.tar -C /tmp/extract_here/</p>
+</blockquote>
+<ul>
+<li>TAR.GZ</li>
+</ul>
+<p>​    这种格式是我使用得最多的压缩格式。它在压缩时不会占用太多CPU的，而且可以得到一个非常理想的压缩率。使用下面这种格式去压缩一个目录：</p>
+<blockquote>
+<p>tar -zcvf archive_name.tar.gz directory_to_compress</p>
+</blockquote>
+<p>解压缩：</p>
+<blockquote>
+<p>tar -zxvf archive_name.tar.gz</p>
+</blockquote>
+<p>上面这个解包命令将会将文档解开在当前目录下面。当然，你也可以用这个命令来捏住解包的路径：</p>
+<blockquote>
+<p>tar -zxvf archive_name.tar.gz -C /tmp/extract_here/</p>
+</blockquote>
+<ul>
+<li>TAR.BZ2</li>
+</ul>
+<p>​    这种压缩格式是我们提到的所有方式中压缩率最好的。当然，这也就意味着，它比前面的方式要占用更多的CPU与时间。这个就是你如何使用tar.bz2进行压缩。</p>
+<blockquote>
+<p>tar -jcvf archive_name.tar.bz2 directory_to_compress</p>
+</blockquote>
+<p>上面这个解包命令将会将文档解开在当前目录下面。当然，你也可以用这个命令来捏住解包的路径：</p>
+<blockquote>
+<p>tar -jxvf archive_name.tar.bz2 -C /tmp/extract_here/</p>
+</blockquote>
+<h4 id="伍-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-配置java："><a href="#伍-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-配置java：" class="headerlink" title="伍&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;配置java："></a>伍&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;配置java：</h4><p>sudo gedit  /etc/profile</p>
+<p>export JAVA_HOME=/usr/java/jdk1.8.0_151<br>export CLASSPATH=.:$JAVA_HOME/lib:$JAVA_HOME/jre/lib:$CLASSPATH<br>export PATH=$JAVA_HOME/bin:$JAVA_HOME/jre/bin:$PATH</p>
+<p>sudo source /etc/profile </p>
+<h4 id="陆-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-发现firefox仍然无法检测到java，换Chromium"><a href="#陆-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-发现firefox仍然无法检测到java，换Chromium" class="headerlink" title="陆&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;发现firefox仍然无法检测到java，换Chromium"></a>陆&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;发现firefox仍然无法检测到java，换Chromium</h4><p>​    Ubuntu 16.04下安装Chromium浏览器，可以通过“Ubuntu软件中心”搜索安装。但这样安装的Chromium浏览器版本比较旧了。我们可以通过ppa，安装最新版本的Chromium浏览器。<br>Ubuntu 16.04下安装64位谷歌Chrome浏览器 <a href="http://www.linuxidc.com/Linux/2016-05/131096.htm" target="_blank" rel="noopener">http://www.linuxidc.com/Linux/2016-05/131096.htm</a><br>Ubuntu 16.04中安装Chromium浏览器  <a href="http://www.linuxidc.com/Linux/2016-05/131097.htm" target="_blank" rel="noopener">http://www.linuxidc.com/Linux/2016-05/131097.htm</a><br>Ubuntu 16.04中为Chromium、Chrome、Firefox安装Flash播放器插件  <a href="http://www.linuxidc.com/Linux/2016-05/131098.htm" target="_blank" rel="noopener">http://www.linuxidc.com/Linux/2016-05/131098.htm</a><br>在终端中依次运行如下命令：<br>sudo add-apt-repository ppa:a-v-shkop/chromium<br>sudo apt-get update</p>
+<h4 id="柒-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-chromium和chrome的区别："><a href="#柒-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-chromium和chrome的区别：" class="headerlink" title="柒&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;chromium和chrome的区别："></a>柒&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;chromium和chrome的区别：</h4><p>新功能先在chromium出现，而chromium是谷歌的开源项目，有很多开发者共同的去改进，谷歌收集改进后会发布安装包，也就是chromium，然后会将chromium的东西更新到chrome中，chrome不是开源项目，而在chrome内的更新也有一个过程，先更新到chrome的金丝雀版（未验证bug），接着到dev版（大问题已经验证），接着beta（小问题已经验证），都没问题了，再更新到稳定版。</p>
+<h4 id="捌-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-关闭触摸板"><a href="#捌-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-关闭触摸板" class="headerlink" title="捌&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;关闭触摸板"></a>捌&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;关闭触摸板</h4><p>笔记本上的触摸板经常导致误操作，禁止和开启的方法如下：<br>sudo modprobe psmouse 开启触摸板<br>sudo modprobe -r psmouse 关闭触摸板 ——管用-赞<br>另一个办法是安装touchpad-indicator：<br>sudo add-apt-repository ppa:atareao/atareao<br>sudo apt-get update<br>sudo apt-get install touchpad-indicator<br>还有一种方法就是使用FN键来开启和关闭触摸板，我到电脑是fn+esc来切换。</p>
+<h4 id="玖-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-ppa下载chromium失败，"><a href="#玖-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-ppa下载chromium失败，" class="headerlink" title="玖&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;ppa下载chromium失败，"></a>玖&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;ppa下载chromium失败，</h4><ol>
+<li>在软件更新界面 移除chromium的ppa</li>
+<li>cd /etc/apt/sources.list.d</li>
+</ol>
+<p>rex@rex:/etc/apt/sources.list.d$ ll<br>总用量 8<br>… 13:09 ./<br>… 10 12:49 ../<br>… 10 13:09 a-v-shkop-ubuntu-chromium-xenial.list<br>… 10 13:09 a-v-shkop-ubuntu-chromium-xenial.list.save</p>
+<p>$ sudo rm *</p>
+<ol>
+<li>直接去搜索下载chome来安装</li>
+</ol>
+<h4 id="11-打开之后仍然不行，怀疑执行了source-etc-profile，而不是："><a href="#11-打开之后仍然不行，怀疑执行了source-etc-profile，而不是：" class="headerlink" title="11.打开之后仍然不行，怀疑执行了source /etc/profile，而不是："></a>11.打开之后仍然不行，怀疑执行了source /etc/profile，而不是：</h4><p>sudo source /etc/profile，但是执行后说：sudo: source：找不到命令，<br>那么执行su，切换到root，但是：su:认证失败</p>
+<h4 id="12-ubuntu系统开root以及（su-认证失败）完美："><a href="#12-ubuntu系统开root以及（su-认证失败）完美：" class="headerlink" title="12.ubuntu系统开root以及（su:认证失败）完美："></a>12.ubuntu系统开root以及（su:认证失败）完美：</h4><p>​    $ sudo passwd root<br>只是执行source /etc/profile后还是java/javac还是不行，配置得不对</p>
+<h4 id="13-java环境变量配置"><a href="#13-java环境变量配置" class="headerlink" title="13.java环境变量配置"></a>13.java环境变量配置</h4><p>这里采用全局设置方法，它是是所有用户的共用的环境变量</p>
+<p>$sudo gedit ~/.bashrc<br>export JAVA_HOME=/usr/java/jdk1.8.0_151<br>export CLASSPATH=.:$JAVA_HOME/lib:$JAVA_HOME/jre/lib:$CLASSPATH<br>export PATH=$JAVA_HOME/bin:$JAVA_HOME/jre/bin:$PATH</p>
+<p>source ~/.bashrc<br>最后仍然无法检测，那就自己下载安装吧</p>
+<h4 id="14-安装显卡驱动"><a href="#14-安装显卡驱动" class="headerlink" title="14.安装显卡驱动"></a>14.安装显卡驱动</h4><p>在软件和更新 那里选择附加驱动就是了</p>
+<h4 id="15-Ubuntu安装NVIDIA驱动后桌面循环登录问题"><a href="#15-Ubuntu安装NVIDIA驱动后桌面循环登录问题" class="headerlink" title="15.Ubuntu安装NVIDIA驱动后桌面循环登录问题"></a>15.Ubuntu安装NVIDIA驱动后桌面循环登录问题</h4><p>Ctrl-Alt+F1<br>sudo apt-get remove –purge nvidia*<br>sudo reboot</p>
+<h4 id="16-安装vim"><a href="#16-安装vim" class="headerlink" title="16.安装vim"></a>16.安装vim</h4><p>sudo apt-get install vim </p>
+<h4 id="17-另一种安装驱动的方式"><a href="#17-另一种安装驱动的方式" class="headerlink" title="17.另一种安装驱动的方式"></a>17.另一种安装驱动的方式</h4><ul>
+<li>1）把nouveau驱动加入黑名单，即在/etc/modprobe.d/blacklist.conf的后面加入：</li>
+</ul>
+<p>blacklist nouveau </p>
+<ul>
+<li>2）备份initramfs文件</li>
+</ul>
+<p>sudo mv /boot/initramfs-$(uname -r).img /boot/initramfs-$(uname -r).img.bat</p>
+<ul>
+<li>3)重新建立initramfs文件</li>
+</ul>
+<p>sudo dracut -v /boot/initramfs-$(uname -r).img $(uname -r)<br>$ sudo update-initramfs -u  —我自己加的（sudo apt-get install dracut）</p>
+<ul>
+<li>4)检查nouveau驱动，确保没有被加载</li>
+</ul>
+<p>lsmod | grep nouveau</p>
+<p>mv /boot/initramfs-$(uname -r).img /boot/initramfs-$(uname -r).img.bak<br>dracut -v /boot/initramfs-$(uname -r).img $(uname -r)</p>
+<p><a href="http://blog.csdn.net/Perky_mango/article/details/51863618" target="_blank" rel="noopener">http://blog.csdn.net/Perky_mango/article/details/51863618</a><br><a href="https://zhidao.baidu.com/question/620332907672236772.html" target="_blank" rel="noopener">https://zhidao.baidu.com/question/620332907672236772.html</a><br><a href="http://blog.csdn.net/XinyanH/article/details/78330853" target="_blank" rel="noopener">http://blog.csdn.net/XinyanH/article/details/78330853</a><br><a href="http://www.linuxidc.com/Linux/2016-12/138907.htm" target="_blank" rel="noopener">http://www.linuxidc.com/Linux/2016-12/138907.htm</a><br><a href="http://blog.csdn.net/jasonzhangoo/article/details/54866049" target="_blank" rel="noopener">http://blog.csdn.net/jasonzhangoo/article/details/54866049</a><br><a href="http://blog.csdn.net/u010159842/article/details/54344683" target="_blank" rel="noopener">http://blog.csdn.net/u010159842/article/details/54344683</a><br><a href="http://blog.csdn.net/irlwh/article/details/52739821" target="_blank" rel="noopener">http://blog.csdn.net/irlwh/article/details/52739821</a></p>
+<h4 id="18-gedit打开有些txt文件乱码（注意分为2中版本）"><a href="#18-gedit打开有些txt文件乱码（注意分为2中版本）" class="headerlink" title="18.gedit打开有些txt文件乱码（注意分为2中版本）"></a>18.gedit打开有些txt文件乱码（注意分为2中版本）</h4><p><a href="https://wiki.ubuntu.com.cn/Gedit%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81" target="_blank" rel="noopener">https://wiki.ubuntu.com.cn/Gedit%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81</a></p>
+<h4 id="19-安装git"><a href="#19-安装git" class="headerlink" title="19.安装git"></a>19.安装git</h4><p><a href="https://git-scm.com/download/linux" target="_blank" rel="noopener">https://git-scm.com/download/linux</a></p>
+<h4 id="20-解决linux-ubuntu-使用teamviewer11-中文乱码问题-—Failed"><a href="#20-解决linux-ubuntu-使用teamviewer11-中文乱码问题-—Failed" class="headerlink" title="20.解决linux ubuntu 使用teamviewer11 中文乱码问题(—Failed)"></a>20.解决linux ubuntu 使用teamviewer11 中文乱码问题(—Failed)</h4><p><a href="https://chenkaihua.com/2015/12/21/solve-the-problem-of-linux-ubuntu1404-use-teamviewer-chinese-garbled/" target="_blank" rel="noopener">https://chenkaihua.com/2015/12/21/solve-the-problem-of-linux-ubuntu1404-use-teamviewer-chinese-garbled/</a></p>
+<p>出现原因:字体缺失，teamviewer使用的是宋体字体，但是在teamviewer字体目录下没有这个字体</p>
+<ul>
+<li>1 windows上或者网络上下载宋体字体(simsun.ttc,simsun.ttf)</li>
+</ul>
+<p>​    wget <a href="http://down5.pc6.com/qd3/simsun.zip" target="_blank" rel="noopener">http://down5.pc6.com/qd3/simsun.zip</a><br>    unzip simsun.zip</p>
+<ul>
+<li>2.把字体复制到/opt/teamviewer/tv_bin/wine/share/wine/fonts目录</li>
+</ul>
+<p>​    sudo cp simsun.tt* /opt/teamviewer/tv_bin/wine/share/wine/fonts/</p>
+<ul>
+<li>3.重启teamviewer</li>
+</ul>
+<h4 id="21-设置lantern代理"><a href="#21-设置lantern代理" class="headerlink" title="21.设置lantern代理"></a>21.设置lantern代理</h4><p><a href="https://www.jianshu.com/p/e9d461b8019d" target="_blank" rel="noopener">https://www.jianshu.com/p/e9d461b8019d</a></p>
+	  
+
+	  <div>
+  		<center>
+		  <div class="pagination">
+<ul class="pagination">
+	
+	
+	
+	
+	
+	
+		
+			
+			
+		
+	
+		
+			
+			
+			
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+	
+	
+		<li class="prev disabled"><a><i class="fa fa-arrow-circle-o-left"></i>prev</a></li>
+	
+	<li><a href="/"><i class="fa fa-archive"></i>Home</a></li>
+	
+		<li class="next"><a href="/2018/05/18/NDK/" class="alignright next">next<i class="fa fa-arrow-circle-o-right"></i></a></li>
+	
+</ul>
+</div>
+
+		</center>
+	  </div>
+	  
+	</div> <!-- col-md-9/col-md-12 -->
+	
+  </div><!-- row -->
+
+	</div>
+  </div>
+  <div class="container-narrow">
+	<footer> <p>
+  &copy; 2018 rex
+  
+      with help from <a href="http://zespia.tw/hexo/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-wixo/">Wixo</a>.    
+</p> </footer>
+  </div> <!-- container-narrow -->
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/jquery.tableofcontents.min.js"></script>
+<script src="/js/tocgenerator.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+
+</body>
+</html>
