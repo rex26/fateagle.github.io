@@ -1,0 +1,211 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>j2ee problems | Rex的博客</title>
+  <meta name="author" content="rex">
+  
+  <meta name="description" content="一般的乱码
+web.xml
+
+123456789101112&amp;lt;filter&amp;gt;        &amp;lt;filter-name&amp;gt;encodingFilter&amp;lt;/filter-name&amp;gt;        &amp;lt;filter-class&amp;gt;org.springframewo">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="j2ee problems"/>
+  <meta property="og:site_name" content="Rex的博客"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="Rex的博客" type="application/atom+xml">
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">  
+  <link rel="stylesheet" href="/css/sidenav.css" media="screen" type="text/css">  
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+
+</head>
+
+<body id="body" data-spy="scroll" data-target=".toc">
+  <div class="container" id="container">
+	<div class="content">
+	  <div class="page-header">		
+  <h1><a class="brand" href="/">Rex的博客</a><span class="split"></span><span class="title">j2ee problems</span><span class="date" id="title-date"><i class="fa fa-clock-o"></i> 2018-05-24</span></h1>
+</div>		
+
+<div class="row page">
+  <!-- cols -->	
+  
+  
+
+  
+	<div class="col-md-12">
+	  
+
+	  <!-- content -->
+	  <h4 id="一般的乱码"><a href="#一般的乱码" class="headerlink" title="一般的乱码"></a>一般的乱码</h4><ul>
+<li>web.xml</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;filter&gt;</span><br><span class="line">        &lt;filter-name&gt;encodingFilter&lt;/filter-name&gt;</span><br><span class="line">        &lt;filter-class&gt;org.springframework.web.filter.CharacterEncodingFilter &lt;/filter-class&gt;</span><br><span class="line">        &lt;init-param&gt;</span><br><span class="line">            &lt;param-name&gt;encoding&lt;/param-name&gt;</span><br><span class="line">            &lt;param-value&gt;UTF-8&lt;/param-value&gt;</span><br><span class="line">        &lt;/init-param&gt;</span><br><span class="line">    &lt;/filter&gt;</span><br><span class="line">    &lt;filter-mapping&gt;</span><br><span class="line">        &lt;filter-name&gt;encodingFilter&lt;/filter-name&gt;</span><br><span class="line">        &lt;url-pattern&gt;/*&lt;/url-pattern&gt;</span><br><span class="line">    &lt;/filter-mapping&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>tomcat</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;Connector port=&quot;8080&quot; protocol=&quot;HTTP/1.1&quot;</span><br><span class="line">               connectionTimeout=&quot;20000&quot;</span><br><span class="line">               redirectPort=&quot;8443&quot; URIEncoding=&quot;UTF-8&quot;/&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="struts2出现Unable-to-load-configuration-bean-jar-file-…struts-default-xml问题"><a href="#struts2出现Unable-to-load-configuration-bean-jar-file-…struts-default-xml问题" class="headerlink" title="struts2出现Unable to load configuration. - bean - jar:file:/…struts-default.xml问题"></a>struts2出现Unable to load configuration. - bean - jar:file:/…struts-default.xml问题</h4><blockquote>
+<p>Idea的话 把out目录删除了再试, 意思就是把当前部署目录删除后重新编译生成</p>
+</blockquote>
+<h4 id="Tomcat-java-lang-Exception-Socket-bind-failed-730013"><a href="#Tomcat-java-lang-Exception-Socket-bind-failed-730013" class="headerlink" title="Tomcat java.lang.Exception: Socket bind failed: [730013]"></a>Tomcat java.lang.Exception: Socket bind failed: [730013]</h4><blockquote>
+<p>端口被占用,需要换端口</p>
+</blockquote>
+<h4 id="org-apache-jasper-JasperException-Unable-to-compile-class-for-JSP"><a href="#org-apache-jasper-JasperException-Unable-to-compile-class-for-JSP" class="headerlink" title="org.apache.jasper.JasperException: Unable to compile class for JSP:"></a>org.apache.jasper.JasperException: Unable to compile class for JSP:</h4><ul>
+<li><p>我遇到的情况是, 使用了tomcat7.0+, 换成tomcat6.0+即可</p>
+</li>
+<li><p><strong>或者把</strong>javax.servlet.jar 和 javax.servlet.jsp.jar ,catalina.jar、jsp-api.jar、servlet-api.jar等这样的重复包，把它们从工程中删了就行（对于上面的异常，原因应该是包jsp-api.jar） </p>
+</li>
+</ul>
+<h4 id="oracle之间传输数据注意点"><a href="#oracle之间传输数据注意点" class="headerlink" title="oracle之间传输数据注意点"></a>oracle之间传输数据注意点</h4><blockquote>
+<p>如果入到频繁出错的情况, 视图放到最后传输, 视图一般牵涉多表</p>
+</blockquote>
+	  
+
+	  <div>
+  		<center>
+		  <div class="pagination">
+<ul class="pagination">
+	
+	
+	
+	
+	
+	
+		
+			
+			
+		
+	
+		
+			
+			
+			
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+	
+	
+		<li class="prev disabled"><a><i class="fa fa-arrow-circle-o-left"></i>prev</a></li>
+	
+	<li><a href="/"><i class="fa fa-archive"></i>Home</a></li>
+	
+		<li class="next"><a href="/2018/05/22/other-problems/" class="alignright next">next<i class="fa fa-arrow-circle-o-right"></i></a></li>
+	
+</ul>
+</div>
+
+		</center>
+	  </div>
+	  
+	</div> <!-- col-md-9/col-md-12 -->
+	
+  </div><!-- row -->
+
+	</div>
+  </div>
+  <div class="container-narrow">
+	<footer> <p>
+  &copy; 2018 rex
+  
+      with help from <a href="http://zespia.tw/hexo/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-wixo/">Wixo</a>.    
+</p> </footer>
+  </div> <!-- container-narrow -->
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/jquery.tableofcontents.min.js"></script>
+<script src="/js/tocgenerator.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+
+</body>
+</html>
