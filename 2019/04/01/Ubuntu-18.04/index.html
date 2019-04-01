@@ -1,0 +1,341 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Rex的博客</title>
+  <meta name="author" content="rex">
+  
+  <meta name="description" content="Ubuntu 18.04replace sourcehttps://blog.csdn.net/qq_37258787/article/details/80270463
+install typorahttps://www.typora.io/#linux
+input method - sougouh">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+  <meta property="og:site_name" content="Rex的博客"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="Rex的博客" type="application/atom+xml">
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">  
+  <link rel="stylesheet" href="/css/sidenav.css" media="screen" type="text/css">  
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+
+</head>
+
+<body id="body" data-spy="scroll" data-target=".toc">
+  <div class="container" id="container">
+	<div class="content">
+	  <div class="page-header">		
+  <h1><a class="brand" href="/">Rex的博客</a><span class="split"></span><span class="title"></span><span class="date" id="title-date"><i class="fa fa-clock-o"></i> 2019-04-01</span></h1>
+</div>		
+
+<div class="row page">
+  <!-- cols -->	
+  
+  
+
+  
+	<div class="col-md-12">
+	  
+
+	  <!-- content -->
+	  <h1 id="Ubuntu-18-04"><a href="#Ubuntu-18-04" class="headerlink" title="Ubuntu 18.04"></a>Ubuntu 18.04</h1><h4 id="replace-source"><a href="#replace-source" class="headerlink" title="replace source"></a>replace source</h4><p><a href="https://blog.csdn.net/qq_37258787/article/details/80270463" target="_blank" rel="noopener">https://blog.csdn.net/qq_37258787/article/details/80270463</a></p>
+<h4 id="install-typora"><a href="#install-typora" class="headerlink" title="install typora"></a>install typora</h4><p><a href="https://www.typora.io/#linux" target="_blank" rel="noopener">https://www.typora.io/#linux</a></p>
+<h4 id="input-method-sougou"><a href="#input-method-sougou" class="headerlink" title="input method - sougou"></a>input method - sougou</h4><p><a href="https://blog.csdn.net/lupengCSDN/article/details/80279177" target="_blank" rel="noopener">https://blog.csdn.net/lupengCSDN/article/details/80279177</a></p>
+<h4 id="sudo-apt-install-fcitx"><a href="#sudo-apt-install-fcitx" class="headerlink" title="sudo apt install fcitx"></a>sudo apt install fcitx</h4><p>安装过程中如果有错，运行sudo apt  –fix-broken install</p>
+<h4 id="oh-my-zsh"><a href="#oh-my-zsh" class="headerlink" title="oh my zsh"></a>oh my zsh</h4><p>sudo apt install curl</p>
+<p>sudo apt-get install zsh</p>
+<p>这句没用：$ sh -c “$(curl -fsSL <a href="https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh" target="_blank" rel="noopener">https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh</a>)”</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">查看系统当前使用的shell</span><br><span class="line"><span class="meta">$</span> echo $SHELL </span><br><span class="line">查看系统是否安装了zsh</span><br><span class="line"><span class="meta">$</span> cat /etc/shells </span><br><span class="line">切换shell为zsh</span><br><span class="line">chsh -s /bin/zsh</span><br></pre></td></tr></table></figure>
+<p><a href="https://www.cnblogs.com/EasonJim/p/7863099.html" target="_blank" rel="noopener">Ubuntu 16.04下安装zsh和oh-my-zsh</a></p>
+<p><a href="https://www.jianshu.com/p/d194d29e488c?open_source=weibo_search" target="_blank" rel="noopener">oh-my-zsh,让你的终端从未这么爽过</a></p>
+<p><a href="https://ohmyz.sh/" target="_blank" rel="noopener">安装oh my zsh 就直接curl了</a></p>
+<p><a href="https://wdxtub.com/2016/02/18/oh-my-zsh/" target="_blank" rel="noopener">阅读使用技巧和高级教程部分</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">常见用法：</span><br><span class="line"></span><br><span class="line">.. 或 ... 切换目录，省掉cd</span><br><span class="line">d 显示之前切换过的目录，输入数字1、2、3来切换目录，数字0代表当前目录不能用</span><br><span class="line">wd插件 </span><br><span class="line">wd add sname 将当前目录以sname为别名存起来</span><br><span class="line">wd sname 类似cd到原目录</span><br><span class="line">wd list 列出所有目录的别名</span><br><span class="line">wd rm sname 删除别名</span><br></pre></td></tr></table></figure>
+<h4 id="Albert"><a href="#Albert" class="headerlink" title="Albert"></a>Albert</h4><p>暂时不安装，Ubuntu自带的搜索挺好</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sudo add-apt-repository ppa:nilarimogard/webupd8</span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install albert</span><br><span class="line"></span><br><span class="line">E: Unable to locate package albert</span><br><span class="line">是一个os launcher，和现在的差不多，算了后面再说吧</span><br></pre></td></tr></table></figure>
+<h4 id="tmux"><a href="#tmux" class="headerlink" title="tmux"></a>tmux</h4><p>sudo apt-get install tmux</p>
+<p>暂时还不会用，什么都要ctrl+b还是有点效率底下</p>
+<h4 id="git"><a href="#git" class="headerlink" title="git"></a>git</h4><p> sudo apt install git-all</p>
+<h4 id="chrome、typora、teamviewer、wps"><a href="#chrome、typora、teamviewer、wps" class="headerlink" title="chrome、typora、teamviewer、wps"></a>chrome、typora、teamviewer、wps</h4><p>Ubuntu software center</p>
+<h4 id="configuration"><a href="#configuration" class="headerlink" title="configuration"></a>configuration</h4><h4 id="access-stackoverflow"><a href="#access-stackoverflow" class="headerlink" title="access stackoverflow"></a>access stackoverflow</h4><p><a href="https://blog.csdn.net/xinyu391/article/details/80334444" target="_blank" rel="noopener">https://blog.csdn.net/xinyu391/article/details/80334444</a></p>
+<h4 id="access-github"><a href="#access-github" class="headerlink" title="access github"></a>access github</h4><p><a href="https://blog.csdn.net/tsq292978891/article/details/78260066" target="_blank" rel="noopener">https://blog.csdn.net/tsq292978891/article/details/78260066</a></p>
+<p>刷新DNS缓存</p>
+<p>Linux:</p>
+<blockquote>
+<p> sudo /etc/init.d/networking restart</p>
+</blockquote>
+<p>Windows:</p>
+<blockquote>
+<p> ipconfig /flushdns</p>
+</blockquote>
+<h4 id="access-google-etc"><a href="#access-google-etc" class="headerlink" title="access google etc."></a>access google etc.</h4><p><a href="https://laod.cn/hosts/" target="_blank" rel="noopener">https://laod.cn/hosts/</a></p>
+<h4 id="remote-desktop"><a href="#remote-desktop" class="headerlink" title="remote desktop"></a>remote desktop</h4><p>sudo apt-get install rdesktop</p>
+<p>sudo apt-get install tsclient</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">helios@helios-xv:~$ sudo apt-get install tsclient</span><br><span class="line">Reading package lists... Done</span><br><span class="line">Building dependency tree       </span><br><span class="line">Reading state information... Done</span><br><span class="line">E: Unable to locate package tsclient</span><br><span class="line"></span><br><span class="line">sudo apt-get autoremove --purge tsclient </span><br><span class="line"></span><br><span class="line">OVER</span><br></pre></td></tr></table></figure>
+<p><strong><em>use remmia  instead of tsclient</em></strong></p>
+<h4 id="wine-tim"><a href="#wine-tim" class="headerlink" title="wine + tim"></a>wine + tim</h4><p><a href="https://blog.csdn.net/weixin_38312031/article/details/79690027" target="_blank" rel="noopener">https://blog.csdn.net/weixin_38312031/article/details/79690027</a></p>
+<h4 id="unzip-rar"><a href="#unzip-rar" class="headerlink" title="unzip rar"></a>unzip rar</h4><p>sudo apt-get install unrar</p>
+<p>unrar e simsunttc.rar</p>
+<h4 id="wine-font"><a href="#wine-font" class="headerlink" title="wine font"></a>wine font</h4><p><a href="https://jingyan.baidu.com/article/1974b28953c881f4b0f7744c.html" target="_blank" rel="noopener">https://jingyan.baidu.com/article/1974b28953c881f4b0f7744c.html</a></p>
+<h4 id="TIM中文字体问题"><a href="#TIM中文字体问题" class="headerlink" title="TIM中文字体问题"></a>TIM中文字体问题</h4><p>winetricks corefonts cjkfonts</p>
+<p><a href="https://blog.csdn.net/h2oco2ch4/article/details/78390110" target="_blank" rel="noopener">https://blog.csdn.net/h2oco2ch4/article/details/78390110</a></p>
+<h4 id="adb-devices-no-permission-（可以自己创建70-android-rules文件）"><a href="#adb-devices-no-permission-（可以自己创建70-android-rules文件）" class="headerlink" title="adb devices no permission （可以自己创建70-android.rules文件）"></a>adb devices no permission （可以自己创建70-android.rules文件）</h4><p><a href="https://blog.csdn.net/binglumeng/article/details/69525361" target="_blank" rel="noopener">https://blog.csdn.net/binglumeng/article/details/69525361</a></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">lsusb</span><br><span class="line">sudo gedit /etc/udev/rules.d/70-android.rules</span><br><span class="line">sudo service udev restart</span><br><span class="line"></span><br><span class="line">sudo killall adb</span><br></pre></td></tr></table></figure>
+<h4 id="开发工具快捷启动"><a href="#开发工具快捷启动" class="headerlink" title="开发工具快捷启动"></a>开发工具快捷启动</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[Desktop Entry]</span><br><span class="line">Type=Application</span><br><span class="line">Name=Idea</span><br><span class="line">GenericName=Idea</span><br><span class="line">Comment=Idea</span><br><span class="line">Exec=sh /home/helios/tools/WebStorm-181.5281.31/bin/webstorm.sh</span><br><span class="line">Icon=/home/helios/tools/WebStorm-181.5281.31/bin/webstorm.png</span><br><span class="line">Terminal=false</span><br><span class="line">Encoding=UTF-8</span><br></pre></td></tr></table></figure>
+<h4 id="notepad-qq"><a href="#notepad-qq" class="headerlink" title="notepad qq"></a>notepad qq</h4><ul>
+<li>install</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo add-apt-repository ppa:notepadqq-team/notepadqq</span><br><span class="line"></span><br><span class="line">sudo apt-get update</span><br><span class="line"></span><br><span class="line">sudo apt-get install notepadqq</span><br></pre></td></tr></table></figure>
+<ul>
+<li>uninstall</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get remove notepadqq</span><br><span class="line"></span><br><span class="line">sudo add-apt-repository --removeppa:notepadqq-team/notepadqq</span><br></pre></td></tr></table></figure>
+<h4 id="navicate"><a href="#navicate" class="headerlink" title="navicate"></a>navicate</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">./start_navicat</span><br><span class="line"></span><br><span class="line">/home/helios/Downloads/navicat120_premium_en_x64</span><br><span class="line"></span><br><span class="line">navicate 破解 删除 ~/.navicate</span><br></pre></td></tr></table></figure>
+<h4 id="regexbuddy"><a href="#regexbuddy" class="headerlink" title="regexbuddy"></a>regexbuddy</h4><p>wine 直接安装破解版就可以了</p>
+<h4 id="Android-studio、Idea、Webstorm"><a href="#Android-studio、Idea、Webstorm" class="headerlink" title="Android studio、Idea、Webstorm"></a>Android studio、Idea、Webstorm</h4><p>解压即可</p>
+<h4 id="自由门"><a href="#自由门" class="headerlink" title="自由门"></a>自由门</h4><p>用wine直接运行即可</p>
+<h4 id="关机"><a href="#关机" class="headerlink" title="关机"></a>关机</h4><p><del>sync &amp;&amp; sudo sync</del></p>
+<p><del>回车，然后输入</del></p>
+<p><del>shutdown -h now 或者 sudo reboot</del></p>
+<p>附加驱动修改为N卡的就可以了</p>
+<h4 id="sougou搜狗乱码"><a href="#sougou搜狗乱码" class="headerlink" title="sougou搜狗乱码"></a>sougou搜狗乱码</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">cd ~/.config</span><br><span class="line">rm -rf SogouPY* sogou*</span><br><span class="line"></span><br><span class="line">注销后即可</span><br><span class="line"></span><br><span class="line">另外：</span><br><span class="line">方法：打开fcitx设置，切换到附加组件选项卡，取消经典界面的使用（也许需要点一下下面的高级）。</span><br></pre></td></tr></table></figure>
+<h4 id="terminator"><a href="#terminator" class="headerlink" title="terminator"></a>terminator</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install terminator</span><br></pre></td></tr></table></figure>
+<p><a href="https://www.linuxidc.com/Linux/2018-01/150000.htm" target="_blank" rel="noopener">https://www.linuxidc.com/Linux/2018-01/150000.htm</a></p>
+<h4 id="禁用快捷键Ctrl-alt-down-up"><a href="#禁用快捷键Ctrl-alt-down-up" class="headerlink" title="禁用快捷键Ctrl alt down/up"></a>禁用快捷键Ctrl alt down/up</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-down "['']"</span><br><span class="line">gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-up "['']"</span><br></pre></td></tr></table></figure>
+<h4 id="修改-复-关-门-等字体显示不正常的问题"><a href="#修改-复-关-门-等字体显示不正常的问题" class="headerlink" title="修改 复 关 门 等字体显示不正常的问题"></a>修改 复 关 门 等字体显示不正常的问题</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo gedit /etc/fonts/conf.d/64-language-selector-prefer.conf</span><br><span class="line">把JP的移动到最后就可以了</span><br></pre></td></tr></table></figure>
+<h4 id="显示网速"><a href="#显示网速" class="headerlink" title="显示网速"></a>显示网速</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sudo add-apt-repository ppa:fossfreedom/indicator-sysmonitor</span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install indicator-sysmonitor</span><br><span class="line"></span><br><span class="line">启动:</span><br><span class="line">indicator-sysmonitor &amp;</span><br></pre></td></tr></table></figure>
+<h4 id="安装flash"><a href="#安装flash" class="headerlink" title="安装flash"></a>安装flash</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install pepperflashplugin-nonfree</span><br></pre></td></tr></table></figure>
+<h4 id="安装RPM"><a href="#安装RPM" class="headerlink" title="安装RPM"></a>安装RPM</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install alien #alien默认没有安装，所以首先要安装它 </span><br><span class="line"></span><br><span class="line">sudo alien xxxx.rpm #将rpm转换位deb，完成后会生成一个同名的xxxx.deb </span><br><span class="line"></span><br><span class="line">注意，用alien转换的deb包并不能保证100%顺利安装，所以可以找到deb最好直接用deb</span><br></pre></td></tr></table></figure>
+<h4 id="Failed-to-load-module-“canberra-gtk-module”"><a href="#Failed-to-load-module-“canberra-gtk-module”" class="headerlink" title="Failed to load module “canberra-gtk-module”"></a>Failed to load module “canberra-gtk-module”</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install libcanberra-gtk-module</span><br></pre></td></tr></table></figure>
+<h4 id="VPN-Google-Cloud-Platform"><a href="#VPN-Google-Cloud-Platform" class="headerlink" title="VPN(Google Cloud Platform)"></a>VPN(Google Cloud Platform)</h4><p>/usr/local/share/shadowsocksr/config.json</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">SSR脚本支持的命令</span><br><span class="line"></span><br><span class="line">SSR启动 | 停止 | 重启 | 查看状态</span><br><span class="line">/etc/init.d/shadowsocks-r start | stop | restart | status</span><br><span class="line"></span><br><span class="line">SSR配置文件路径</span><br><span class="line">/etc/shadowsocks-r/config.json</span><br></pre></td></tr></table></figure>
+<p>/etc/init.d/networking restart</p>
+<p>终端使用VPN：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export http_proxy="http://127.0.0.1:8123/"</span><br><span class="line">export https_proxy="http://127.0.0.1:8123/"</span><br></pre></td></tr></table></figure>
+<p>启动SSR、polipo：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ssr start</span><br><span class="line"></span><br><span class="line">sudo service polipo start</span><br></pre></td></tr></table></figure>
+<h4 id="终端常用命令"><a href="#终端常用命令" class="headerlink" title="终端常用命令"></a>终端常用命令</h4><p><a href="https://www.linuxidc.com/Linux/2017-12/149748.htm" target="_blank" rel="noopener">https://www.linuxidc.com/Linux/2017-12/149748.htm</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Ctrl+a	光标移动到开始位置</span><br><span class="line">Ctrl+e	光标移动到最末尾</span><br><span class="line">Ctrl+k	删除此处至末尾的所有内容</span><br><span class="line">Ctrl+u	删除此处至开始的所有内容</span><br><span class="line">Ctrl+l	相当于clear，即清屏</span><br><span class="line">Ctrl+&amp;	恢复 ctrl+h 或者 ctrl+d 或者 ctrl+w 删除的内容</span><br><span class="line">Ctrl+Left-Arrow	光标移动到上一个单词的词首</span><br><span class="line">Ctrl+Right-Arrow	光标移动到下一个单词的词尾</span><br><span class="line">CTRL + Z: 把当前任务放到后台运行（相当于运行命令时后面加&amp;）</span><br><span class="line">~: 表示用户目录路径</span><br></pre></td></tr></table></figure>
+<h4 id="usr-bin-env-‘bash-r’-No-such-file-or-directory"><a href="#usr-bin-env-‘bash-r’-No-such-file-or-directory" class="headerlink" title="/usr/bin/env: ‘bash\r’: No such file or directory"></a>/usr/bin/env: ‘bash\r’: No such file or directory</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install dos2unix</span><br><span class="line">dos2unix filexxx</span><br><span class="line"></span><br><span class="line">or</span><br><span class="line"></span><br><span class="line">vi filexxx</span><br><span class="line">&gt;:set ff</span><br><span class="line">&gt;:set ff=unix</span><br><span class="line">&gt;:wq</span><br></pre></td></tr></table></figure>
+<h4 id="开机挂载NTFS分区"><a href="#开机挂载NTFS分区" class="headerlink" title="开机挂载NTFS分区"></a>开机挂载NTFS分区</h4><p><a href="https://www.cnblogs.com/bluemaplestudio/p/8984314.html" target="_blank" rel="noopener">参考</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">1.找到UUID</span><br><span class="line">sudo blkid</span><br><span class="line">2.挂载点文件夹创建</span><br><span class="line">例如：/media/主机名/硬盘分区名</span><br><span class="line">sudo mkdir /media/helios/data</span><br><span class="line">3.sudo gedit /etc/fstab</span><br><span class="line">格式：UUID=之前在第一步查到各硬盘的uuid的复制到这里 /media/主机名/硬盘分区名 ntfs defaults 0 0</span><br><span class="line">例如：UUID=00A4CC2CA4CC25CE /media/wind/data ntfs defaults 0 0</span><br><span class="line">4.sudo mount -a</span><br></pre></td></tr></table></figure>
+<h4 id="没有声音"><a href="#没有声音" class="headerlink" title="没有声音"></a>没有声音</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span>sudo apt install -y pavucontrol</span><br><span class="line"><span class="meta">$</span>pavucontrol</span><br><span class="line"></span><br><span class="line">sudo alsamixer</span><br></pre></td></tr></table></figure>
+<h4 id="chrome-chromium-第一次启动要输入密码"><a href="#chrome-chromium-第一次启动要输入密码" class="headerlink" title="chrome/chromium 第一次启动要输入密码"></a>chrome/chromium 第一次启动要输入密码</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo gedit /usr/share/applications/chromium-browser.desktop</span><br><span class="line"></span><br><span class="line">Then edit the file such that the Exec line reads like this:</span><br><span class="line">Exec=chromium --password-store=basic %U</span><br></pre></td></tr></table></figure>
+<h4 id="有线网络"><a href="#有线网络" class="headerlink" title="有线网络"></a>有线网络</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">sudo gedit /etc/NetworkManager/NetworkManager.conf</span><br><span class="line">sudo service network-manager restart</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">sudo gedit /etc/network/interfaces</span><br><span class="line"></span><br><span class="line">sudo gedit /etc/netplan/01-network-manager-all.yaml</span><br><span class="line">sudo netplan apply</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">sudo gedit /etc/resolv.conf</span><br></pre></td></tr></table></figure>
+<h4 id="add-app-to-folders"><a href="#add-app-to-folders" class="headerlink" title="add app to folders"></a>add app to folders</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install gnome-tweak-tool</span><br><span class="line">把ext移动到以下目录，然后保证ext的folder name 和 meta.json的一致</span><br><span class="line">~/.local/share/gnome-shell/extensions</span><br></pre></td></tr></table></figure>
+<h4 id="wps不小心搞来用不了了"><a href="#wps不小心搞来用不了了" class="headerlink" title="wps不小心搞来用不了了"></a>wps不小心搞来用不了了</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get autoremove wps-office</span><br></pre></td></tr></table></figure>
+<h4 id="everything-angrysearch"><a href="#everything-angrysearch" class="headerlink" title="everything angrysearch"></a>everything angrysearch</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">https://askubuntu.com/questions/714091/my-quest-to-find-the-fastest-search-app-for-linux</span><br><span class="line"></span><br><span class="line">sudo apt install python3-pyqt5</span><br><span class="line">chmod +x install.sh</span><br><span class="line">sudo ./install.sh</span><br></pre></td></tr></table></figure>
+<h4 id="下载百度网盘-xdm-BaiduPCS"><a href="#下载百度网盘-xdm-BaiduPCS" class="headerlink" title="下载百度网盘 xdm BaiduPCS"></a>下载百度网盘 xdm BaiduPCS</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">http://xdman.sourceforge.net/</span><br><span class="line"></span><br><span class="line">https://github.com/iikira/BaiduPCS-Go</span><br><span class="line"></span><br><span class="line">chrome: tampermonkey ,chrono download manager</span><br></pre></td></tr></table></figure>
+<h4 id="zip-解压乱码"><a href="#zip-解压乱码" class="headerlink" title="zip 解压乱码"></a>zip 解压乱码</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">https://blog.csdn.net/lym152898/article/details/54346851</span><br><span class="line"></span><br><span class="line">unzip -O CP936 filename.zip</span><br></pre></td></tr></table></figure>
+<h4 id="将iso写入U盘"><a href="#将iso写入U盘" class="headerlink" title="将iso写入U盘"></a>将iso写入U盘</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dd if=ubuntu-16.0.3-desktop-amd64.iso of=/dev/sdb</span><br><span class="line"></span><br><span class="line">unetbootin:</span><br><span class="line">https://www.cnblogs.com/EasonJim/p/8169707.html</span><br></pre></td></tr></table></figure>
+<h4 id="制作U盘启动器"><a href="#制作U盘启动器" class="headerlink" title="制作U盘启动器"></a>制作U盘启动器</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">https://blog.csdn.net/lym152898/article/details/72858617</span><br><span class="line">sudo apt-get install gparted</span><br><span class="line"></span><br><span class="line">https://jingyan.baidu.com/article/d2b1d102bac1845c7e37d49a.html</span><br><span class="line"></span><br><span class="line">https://blog.csdn.net/u013553529/article/details/78307520</span><br><span class="line">Rufus</span><br><span class="line"></span><br><span class="line">都没用...最后装win虚拟机实现的</span><br></pre></td></tr></table></figure>
+<h4 id="NTFS硬盘变为只读-read-only-system"><a href="#NTFS硬盘变为只读-read-only-system" class="headerlink" title="NTFS硬盘变为只读(read only system)"></a>NTFS硬盘变为只读(read only system)</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Ubuntu software 安装 ntfs-config</span><br><span class="line">sudo ntfs-config设置</span><br><span class="line"></span><br><span class="line">sudo apt-get remove ntfsprogs &amp;&amp; sudo apt-get install ntfs-3g</span><br><span class="line">sudo ntfsfix dev/sdaX</span><br><span class="line">重启</span><br></pre></td></tr></table></figure>
+<h4 id="安装Mysql"><a href="#安装Mysql" class="headerlink" title="安装Mysql"></a>安装Mysql</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">http://baijiahao.baidu.com/s?id=1605397136747327756&amp;wfr=spider&amp;for=pc</span><br><span class="line"></span><br><span class="line">直接使用命令安装Mysql Server安装的是Mysql 5.7，而Mysql 5.7 是没有兼容到Ubuntu 18.04 的.Mysql 在 Ubuntu 18.04 使用会出现一些问题，比如使用Mysql Workbench连接会恒报 “Access denied for user 'root'@'localhost'”.</span><br><span class="line"></span><br><span class="line">sudo apt-get update</span><br><span class="line">到官网下载</span><br><span class="line">sudo dpkg -i mysql-apt-config_0.8.10-1_all.deb</span><br><span class="line"></span><br><span class="line">sudo apt update</span><br><span class="line">使用下面的命令卸载老版本的mysql</span><br><span class="line">sudo apt autoremove mysql-client mysql-server mysql-workbench --purge</span><br><span class="line"></span><br><span class="line">sudo apt install mysql-client mysql-server mysql-workbench</span><br></pre></td></tr></table></figure>
+<h4 id="休眠后白屏问题"><a href="#休眠后白屏问题" class="headerlink" title="休眠后白屏问题"></a>休眠后白屏问题</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sudo gedit /etc/default/grub</span><br><span class="line"></span><br><span class="line">#GRUB_CMDLINE_LINUX_DEFAULT=&quot;quiet splash&quot;</span><br><span class="line">GRUB_CMDLINE_LINUX_DEFAULT=&quot;text&quot;</span><br><span class="line"></span><br><span class="line">这个没有用 nouveau.modeset=0</span><br></pre></td></tr></table></figure>
+<h4 id="charles-注册码、破解"><a href="#charles-注册码、破解" class="headerlink" title="charles 注册码、破解"></a>charles 注册码、破解</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Registered Name:https://zhile.io</span><br><span class="line"></span><br><span class="line">License Key: 48891cf209c6d32bf4</span><br></pre></td></tr></table></figure>
+<h4 id="挂载的NTFS盘为root权限-修改"><a href="#挂载的NTFS盘为root权限-修改" class="headerlink" title="挂载的NTFS盘为root权限 修改"></a>挂载的NTFS盘为root权限 修改</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">id helios查看uid，gid</span><br><span class="line"></span><br><span class="line">sudo gedit /etc/fstab</span><br><span class="line"></span><br><span class="line">/dev/sda3      /media/program    ntfs    defaults,utf8,uid=1000,gid=1000,dmask=022,fmask=133     0       0</span><br><span class="line"></span><br><span class="line">http://blog.sina.com.cn/s/blog_70545bad0100xdnp.html</span><br></pre></td></tr></table></figure>
+<h4 id="访问github慢"><a href="#访问github慢" class="headerlink" title="访问github慢"></a>访问github慢</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">sudo gedit /etc/hosts</span><br><span class="line"></span><br><span class="line">用浏览器访问 IPAddress.com or http://tool.chinaz.com 使用 IP Lookup 工具获得github.com和github.global.ssl.fastly.net域名的ip地址</span><br><span class="line"></span><br><span class="line">在打开的hosts文件中添加如下格式：</span><br><span class="line">192.30.253.112 github.com</span><br><span class="line">151.101.185.194 github.global.ssl.fastly.net</span><br><span class="line"></span><br><span class="line">更新DNS缓存，输入 sudo /etc/init.d/networking restart</span><br></pre></td></tr></table></figure>
+<p>启动任务到后台nohup</p>
+<p><a href="https://blog.csdn.net/selous/article/details/78330991" target="_blank" rel="noopener">参考1</a></p>
+<p><a href="http://www.cnblogs.com/kaituorensheng/p/3980334.html" target="_blank" rel="noopener">参考2</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">nohup command &amp;</span><br><span class="line">#默认输出是重定向到nohup.out文件的</span><br><span class="line"></span><br><span class="line">nohup command &gt;file.out 1&amp;&gt;2 &amp;</span><br><span class="line">#将标准输出和错误输出都重定向到file.out</span><br><span class="line"></span><br><span class="line">因为python的输出有缓冲，所以在运行命令的时候加上-u参数</span><br><span class="line">nohup python -u main.py &amp;</span><br><span class="line"></span><br><span class="line">#筛选需要kill的进程pid</span><br><span class="line">ps -aux|grep &quot;process name&quot;</span><br><span class="line">kill -9 pid</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">三、jobs</span><br><span class="line">查看当前有多少在后台运行的命令</span><br><span class="line"></span><br><span class="line">jobs -l选项可显示所有任务的PID，jobs的状态可以是running, stopped, Terminated。但是如果任务被终止了（kill），shell 从当前的shell环境已知的列表中删除任务的进程标识。</span><br><span class="line"></span><br><span class="line">四、fg</span><br><span class="line">将后台中的命令调至前台继续运行。如果后台中有多个命令，可以用fg %jobnumber（是命令编号，不是进程号）将选中的命令调出。</span><br><span class="line"></span><br><span class="line">五、bg</span><br><span class="line">将一个在后台暂停的命令，变成在后台继续执行。如果后台中有多个命令，可以用bg %jobnumber将选中的命令调出。</span><br><span class="line"></span><br><span class="line">六、kill</span><br><span class="line">法子1：通过jobs命令查看job号（假设为num），然后执行kill %num</span><br><span class="line">法子2：通过ps命令查看job的进程号（PID，假设为pid），然后执行kill pid</span><br><span class="line">前台进程的终止：Ctrl+c</span><br></pre></td></tr></table></figure>
+<h4 id="scp-命令"><a href="#scp-命令" class="headerlink" title="scp 命令"></a>scp 命令</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">拷贝到本地：</span><br><span class="line">scp root@www.cumt.edu.cn:/home/root/others/music /home/space/music/1.mp3 </span><br><span class="line">上次到远程：</span><br><span class="line">scp /home/space/music/1.mp3  root@www.cumt.edu.cn:/home/root/others/music </span><br><span class="line"></span><br><span class="line">目录的话就需要加一个-r即可</span><br><span class="line">scp -r /home/space/music/ root@www.cumt.edu.cn:/home/root/others/</span><br></pre></td></tr></table></figure>
+<h4 id="ssh链接"><a href="#ssh链接" class="headerlink" title="ssh链接"></a>ssh链接</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh root@119.23.208.95回车，然后输入密码</span><br></pre></td></tr></table></figure>
+<h4 id="启动tomcat"><a href="#启动tomcat" class="headerlink" title="启动tomcat"></a>启动tomcat</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">启动方式：</span><br><span class="line">方式一：直接启动 ./startup.sh</span><br><span class="line">方式二：作为服务启动 nohup ./startup.sh &amp;</span><br><span class="line">方式三：控制台动态输出方式启动 ./catalina.sh run 动态地显示tomcat后台的控制台输出信息,Ctrl+C后退出并关闭服务</span><br><span class="line"></span><br><span class="line">解释：</span><br><span class="line">通过方式一、方式三启动的tomcat有个弊端，当客户端连接断开的时候，tomcat服务也会立即停止，通过方式二可以作为linux服务一直运行</span><br><span class="line">通过方式一、方式二方式启动的tomcat，其日志会写到相应的日志文件中，而不能动态地查看tomcat控制台的输出信息与错误情况，通过方式三可以以控制台模式启动tomcat服务，</span><br><span class="line">直接看到程序运行时后台的控制台输出信息，不必每次都要很麻烦的打开catalina.out日志文件进行查看，这样便于跟踪查阅后台输出信息。tomcat控制台信息包括log4j和System.out.println()等输出的信息。</span><br><span class="line"></span><br><span class="line">nohup ./startup.sh &gt;tomcat.out 1&amp;&gt;2 &amp;</span><br></pre></td></tr></table></figure>
+<h4 id="处理打开NTFS-硬盘无法修改"><a href="#处理打开NTFS-硬盘无法修改" class="headerlink" title="处理打开NTFS 硬盘无法修改"></a>处理打开NTFS 硬盘无法修改</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get remove ntfsprogs &amp;&amp; sudo apt-get install ntfs-3g</span><br><span class="line">sudo ntfsfix dev/sdaX</span><br><span class="line">Ubuntu software 安装 ntfs-config</span><br></pre></td></tr></table></figure>
+<h4 id="Sierra-gtk-theme主题安装"><a href="#Sierra-gtk-theme主题安装" class="headerlink" title="Sierra-gtk-theme主题安装"></a>Sierra-gtk-theme主题安装</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install gtk2-engines-murrine gtk2-engines-pixbuf</span><br><span class="line"></span><br><span class="line">sudo apt install sierra-gtk-theme-git</span><br></pre></td></tr></table></figure>
+<h4 id="安装gnome-shell-tool"><a href="#安装gnome-shell-tool" class="headerlink" title="安装gnome shell tool"></a>安装gnome shell tool</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install gnome-shell-extensions</span><br></pre></td></tr></table></figure>
+<p>为了可以去<a href="https://extensions.gnome.org/" target="_blank" rel="noopener">网站</a>安装插件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install chrome-gnome-shell</span><br></pre></td></tr></table></figure>
+<h4 id="unzip-zip"><a href="#unzip-zip" class="headerlink" title="unzip *.zip"></a><code>unzip *.zip</code></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">unzip *.zip  会报错</span><br><span class="line"></span><br><span class="line">Archive: data.zip </span><br><span class="line">caution: filename not matched</span><br><span class="line"></span><br><span class="line">因为会认为后面的zip文件是在第一个zip文件里面的,因此需要 </span><br><span class="line">unzip &apos;*.zip&apos; </span><br><span class="line">或者 </span><br><span class="line">unzip &quot;*.zip&quot; </span><br><span class="line">或者 </span><br><span class="line">unzip \*.zip</span><br></pre></td></tr></table></figure>
+	  
+
+	  <div>
+  		<center>
+		  <div class="pagination">
+<ul class="pagination">
+	
+	
+	
+	
+	
+	
+		
+			
+			
+		
+	
+		
+			
+			
+			
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+	
+	
+		<li class="prev disabled"><a><i class="fa fa-arrow-circle-o-left"></i>prev</a></li>
+	
+	<li><a href="/"><i class="fa fa-archive"></i>Home</a></li>
+	
+		<li class="next"><a href="/2019/04/01/react-native-github-libs/" class="alignright next">next<i class="fa fa-arrow-circle-o-right"></i></a></li>
+	
+</ul>
+</div>
+
+		</center>
+	  </div>
+	  
+	</div> <!-- col-md-9/col-md-12 -->
+	
+  </div><!-- row -->
+
+	</div>
+  </div>
+  <div class="container-narrow">
+	<footer> <p>
+  &copy; 2019 rex
+  
+      with help from <a href="http://zespia.tw/hexo/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-wixo/">Wixo</a>.    
+</p> </footer>
+  </div> <!-- container-narrow -->
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/jquery.tableofcontents.min.js"></script>
+<script src="/js/tocgenerator.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+
+</body>
+</html>

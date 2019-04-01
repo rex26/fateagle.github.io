@@ -6,8 +6,15 @@
   <title>Rex的博客</title>
   <meta name="author" content="rex">
   
-  <meta name="description" content="Dagger2、AutoValue、ButterKnife、sqlbrite、rxjava、eventbustablayout、autolayout、butterknife、retrofit、gradle、https
-LDAP + redmine + gerrit + jenkins + gitla">
+  <meta name="description" content="#Retrofit添加header参数的几种方法。
+
+使用注解的方式
+
+添加一个Header参数
+public interface UserService {    
+  @Headers(&#34;Cache-Control: max-age=640000&#34;)  
+  @GET(&#34;/tasks&#34;)  
+ ">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -46,7 +53,7 @@ LDAP + redmine + gerrit + jenkins + gitla">
   <div class="container" id="container">
 	<div class="content">
 	  <div class="page-header">		
-  <h1><a class="brand" href="/">Rex的博客</a><span class="split"></span><span class="title"></span><span class="date" id="title-date"><i class="fa fa-clock-o"></i> 2018-07-13</span></h1>
+  <h1><a class="brand" href="/">Rex的博客</a><span class="split"></span><span class="title"></span><span class="date" id="title-date"><i class="fa fa-clock-o"></i> 2019-04-01</span></h1>
 </div>		
 
 <div class="row page">
@@ -59,9 +66,8 @@ LDAP + redmine + gerrit + jenkins + gitla">
 	  
 
 	  <!-- content -->
-	  <p>Dagger2、AutoValue、ButterKnife、sqlbrite、rxjava、eventbus<br>tablayout、autolayout、butterknife、retrofit、gradle、https</p>
-<p>LDAP + redmine + gerrit + jenkins + gitlab：使用LAM管理用户</p>
-<h1 id="Retrofit添加header参数的几种方法。"><a href="#Retrofit添加header参数的几种方法。" class="headerlink" title="Retrofit添加header参数的几种方法。"></a>Retrofit添加header参数的几种方法。</h1><ul>
+	  <p>#Retrofit添加header参数的几种方法。</p>
+<ul>
 <li><p>使用注解的方式</p>
 <pre>
 添加一个Header参数
@@ -92,8 +98,14 @@ httpClient.addInterceptor(new Interceptor() {
     public Response intercept(Interceptor.Chain chain) throws IOException {  
         Request original = chain.request();  
 
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">    Request request = original.newBuilder()  </span><br><span class="line">        .header(&quot;User-Agent&quot;, &quot;Your-App-Name&quot;)  </span><br><span class="line">        .header(&quot;Accept&quot;, &quot;application/vnd.yourapi.v1.full+json&quot;)  </span><br><span class="line">        .method(original.method(), original.body())  </span><br><span class="line">        .build();  </span><br><span class="line">  </span><br><span class="line">    return chain.proceed(request);  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        Request request = original.newBuilder()  
+            .header("User-Agent", "Your-App-Name")  
+            .header("Accept", "application/vnd.yourapi.v1.full+json")  
+            .method(original.method(), original.body())  
+            .build();  
 
+        return chain.proceed(request);  
+    }  
 }
 
 OkHttpClient client = httpClient.build();    
@@ -110,8 +122,12 @@ public interface UserService {
   @GET("/tasks")  
   Call<list<task>> getTasks(@Header("Content-Range") String contentRange);  
 }  
-</list<task></pre></li>
+</list<task></pre>
+
+</li>
 </ul>
+<h4 id="Incorrectly-typed-data-found-for-annotation-element-public-abstract-int-butterknife-BindView"><a href="#Incorrectly-typed-data-found-for-annotation-element-public-abstract-int-butterknife-BindView" class="headerlink" title="Incorrectly typed data found for annotation element public abstract int butterknife.BindView"></a>Incorrectly typed data found for annotation element public abstract int butterknife.BindView</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">R2/R文件搞错了.....</span><br></pre></td></tr></table></figure>
+<h4 id="there’s-no-route-matched-ARouter"><a href="#there’s-no-route-matched-ARouter" class="headerlink" title="there’s no route matched ARouter"></a>there’s no route matched ARouter</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">如果什么都正确就检查一下 ,library被引用了没有......</span><br></pre></td></tr></table></figure>
 	  
 
 	  <div>
@@ -142,18 +158,6 @@ public interface UserService {
 	
 		
 			
-		
-	
-		
-			
-		
-	
-		
-			
-		
-	
-		
-			
 			
 		
 	
@@ -225,13 +229,25 @@ public interface UserService {
 			
 		
 	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
 	
 	
-		<li class="prev"><a href="/2019/04/01/ubuntu-log/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>prev</a></li>
+	
+		<li class="prev"><a href="/2019/04/01/android-problem/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>prev</a></li>
 	
 	<li><a href="/"><i class="fa fa-archive"></i>Home</a></li>
 	
-		<li class="next"><a href="/2018/06/15/gradle/" class="alignright next">next<i class="fa fa-arrow-circle-o-right"></i></a></li>
+		<li class="next"><a href="/2019/04/01/j2ee-problems/" class="alignright next">next<i class="fa fa-arrow-circle-o-right"></i></a></li>
 	
 </ul>
 </div>
