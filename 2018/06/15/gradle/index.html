@@ -1,0 +1,252 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>gradle | Rex的博客</title>
+  <meta name="author" content="rex">
+  
+  <meta name="description" content="org.gradle.api.tasks.TaskExecutionException: Execution failed for task ‘:app:transformClassesAndResourcesWithProguardForRelease’.123456Proguard 文件启用时报">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="gradle"/>
+  <meta property="og:site_name" content="Rex的博客"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="Rex的博客" type="application/atom+xml">
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">  
+  <link rel="stylesheet" href="/css/sidenav.css" media="screen" type="text/css">  
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+
+</head>
+
+<body id="body" data-spy="scroll" data-target=".toc">
+  <div class="container" id="container">
+	<div class="content">
+	  <div class="page-header">		
+  <h1><a class="brand" href="/">Rex的博客</a><span class="split"></span><span class="title">gradle</span><span class="date" id="title-date"><i class="fa fa-clock-o"></i> 2018-06-15</span></h1>
+</div>		
+
+<div class="row page">
+  <!-- cols -->	
+  
+  
+
+  
+	<div class="col-md-12">
+	  
+
+	  <!-- content -->
+	  <h4 id="org-gradle-api-tasks-TaskExecutionException-Execution-failed-for-task-‘-app-transformClassesAndResourcesWithProguardForRelease’"><a href="#org-gradle-api-tasks-TaskExecutionException-Execution-failed-for-task-‘-app-transformClassesAndResourcesWithProguardForRelease’" class="headerlink" title="org.gradle.api.tasks.TaskExecutionException: Execution failed for task ‘:app:transformClassesAndResourcesWithProguardForRelease’."></a>org.gradle.api.tasks.TaskExecutionException: Execution failed for task ‘:app:transformClassesAndResourcesWithProguardForRelease’.</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Proguard 文件启用时报错</span><br><span class="line"></span><br><span class="line"><span class="number">1</span>.禁用 proguard 文件</span><br><span class="line">minifyEnabled = <span class="keyword">false</span></span><br><span class="line"><span class="number">2</span>.修改Proguard 文件</span><br><span class="line">-ignorewarnings -keep <span class="class"><span class="keyword">class</span> * </span>&#123; <span class="keyword">public</span> <span class="keyword">private</span> *; &#125;</span><br></pre></td></tr></table></figure>
+<h4 id="All-com-android-support-libraries-must-use-the-exact-same-version-specification-mixing-versions-can-lead-to-runtime-crashes"><a href="#All-com-android-support-libraries-must-use-the-exact-same-version-specification-mixing-versions-can-lead-to-runtime-crashes" class="headerlink" title="All com.android.support libraries must use the exact same version specification (mixing versions can lead to runtime crashes)"></a>All com.android.support libraries must use the exact same version specification (mixing versions can lead to runtime crashes)</h4><blockquote>
+<p>All com.android.support libraries must use the exact same version specification (mixing versions can lead to runtime crashes). Found versions 27.0.2, 26.1.0. Examples include com.android.support:animated-vector-drawable:27.0.2 and com.android.support:customtabs:26.1.0</p>
+<p>there are some combinations of libraries, or tools and libraries, that are incompatible, or can lead to bugs. One such incompatibility is compiling with a version of the Android support libraries that is not the latest version (or in particular, a version lower than your targetSdkVersion.)</p>
+</blockquote>
+<p><strong>Solution:</strong><br>Add explicitly the library with the old version but with a new version number.<br>in my case <code>com.android.support:customtabs:26.1.0</code> so I need to add:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">implementation &quot;com.android.support:customtabs:27.0.2&quot;</span><br></pre></td></tr></table></figure>
+<p>ie: Take the library from the second item, and implement it with the version number from the first.</p>
+<p>Note: don’t forget to press sync now so gradle can rebuild the dependency graph and see if there are any more conflicts.</p>
+<p><strong>Explanation:</strong><br>you may be confused by the error message as don’t use <code>customtabs</code> so how I have a conflict!!<br>well.. you didn’t use it directly but one of your libraries uses an old version of <code>customtabs</code> internally, so you need to ask for it directly.</p>
+<p>if you curious to know which of your libraries is responsible for the old version and maybe ask the author to update his lib, Run a Gradle dependency report, see the old answer to know how.</p>
+<h4 id="android项目app中引用不到module下的jar包问题"><a href="#android项目app中引用不到module下的jar包问题" class="headerlink" title="android项目app中引用不到module下的jar包问题"></a>android项目app中引用不到module下的jar包问题</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">在module中导入了***.jar或者在线的包，在app中如果想引用这个jar里相关的内容时，发现根本引用不到，会提示你add library/*****.jar 一大串，你回车一下或者点一下没反应，根本没有用。</span><br><span class="line"></span><br><span class="line">只需把module下gradle里相关jar的implementation改为api即可，因为implementation 修饰的只能在当前module中引用，你在app下是引用不了的，你改完重新编译下即可进行引用了。</span><br></pre></td></tr></table></figure>
+<h4 id="API-‘variant-getGenerateBuildConfig-’-is-obsolete-and-has-been-replaced"><a href="#API-‘variant-getGenerateBuildConfig-’-is-obsolete-and-has-been-replaced" class="headerlink" title="API ‘variant.getGenerateBuildConfig()’ is obsolete and has been replaced"></a>API ‘variant.getGenerateBuildConfig()’ is obsolete and has been replaced</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">API &apos;variant.getGenerateBuildConfig()&apos; is obsolete and has been replaced with &apos;variant.getGenerateBuildConfigProvider()&apos;.</span><br><span class="line">It will be removed at the end of 2019.</span><br><span class="line">For more information, see https://d.android.com/r/tools/task-configuration-avoidance.</span><br><span class="line">To determine what is calling variant.getGenerateBuildConfig(), use -Pandroid.debug.obsoleteApi=true on the command line to display a stack trace.</span><br><span class="line"></span><br><span class="line">不处理,警告</span><br></pre></td></tr></table></figure>
+<h4 id="in-values-has-no-declaration-in-the-base-values-folder"><a href="#in-values-has-no-declaration-in-the-base-values-folder" class="headerlink" title="in values has no declaration in the base values folder"></a>in values has no declaration in the base values folder</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">确实定义了,重启一下Android Studio</span><br></pre></td></tr></table></figure>
+<h4 id="How-to-fix-Plugin-with-id-‘com-github-dcendents-android-maven’-not-found-in-android-studio"><a href="#How-to-fix-Plugin-with-id-‘com-github-dcendents-android-maven’-not-found-in-android-studio" class="headerlink" title="How to fix Plugin with id ‘com.github.dcendents.android-maven’ not found. in android studio"></a><a href="https://stackoverflow.com/questions/28871084/how-to-fix-plugin-with-id-com-github-dcendents-android-maven-not-found-in-and" target="_blank" rel="noopener">How to fix Plugin with id ‘com.github.dcendents.android-maven’ not found. in android studio</a></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Project dependencies:</span><br><span class="line"></span><br><span class="line">dependencies &#123;</span><br><span class="line">        classpath &apos;com.android.tools.build:gradle:3.2.0&apos;</span><br><span class="line"></span><br><span class="line">        classpath &apos;com.github.dcendents:android-maven-gradle-plugin:2.1&apos;</span><br><span class="line">        classpath &apos;com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.4&apos;</span><br><span class="line">        classpath &apos;com.novoda:bintray-release:0.9&apos;</span><br><span class="line">        // NOTE: Do not place your application dependencies here; they belong</span><br><span class="line">        // in the individual module build.gradle files</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h4 id="方法数大于64K"><a href="#方法数大于64K" class="headerlink" title="方法数大于64K"></a>方法数大于64K</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://developer.android.com/studio/build/multidex</span><br></pre></td></tr></table></figure>
+<h4 id="about-gradle-properties"><a href="#about-gradle-properties" class="headerlink" title="about gradle.properties"></a><a href="https://docs.gradle.org/current/userguide/build_environment.html#sec:gradle_configuration_properties" target="_blank" rel="noopener">about gradle.properties</a></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Setting up a consistent environment for your build is as simple as placing these settings into a gradle.properties file. The configuration is applied in following order (if an option is configured in multiple locations the last one wins):</span><br><span class="line"></span><br><span class="line">gradle.properties in project root directory.</span><br><span class="line"></span><br><span class="line">gradle.properties in GRADLE_USER_HOME directory.</span><br><span class="line"></span><br><span class="line">system properties, e.g. when -Dgradle.user.home is set on the command line.</span><br></pre></td></tr></table></figure>
+<h4 id="what’s-resource-boundle"><a href="#what’s-resource-boundle" class="headerlink" title="what’s resource boundle"></a>what’s resource boundle</h4><p><a href="https://www.jetbrains.com/help/idea/resource-bundle.html" target="_blank" rel="noopener">Resource Bundle</a></p>
+<p>Android Studio hasn’t a resource bundle editor and  hasn’t show the file lists.</p>
+<h4 id="Cannot-Resolve-Symbol-‘R’-Android-Studio"><a href="#Cannot-Resolve-Symbol-‘R’-Android-Studio" class="headerlink" title="Cannot Resolve Symbol ‘R’ Android Studio"></a>Cannot Resolve Symbol ‘R’ Android Studio</h4><p>1.check all your xml files<br>2.clean project or rebuild project<br>3.invalidate and restart<br>4.delete .gralde .idea in your project,USER_HOME/.gradle<br>5.downgrade your gradle plugin version</p>
+<h4 id="Access-project-extra-properties-in-buildscript-closure"><a href="#Access-project-extra-properties-in-buildscript-closure" class="headerlink" title="Access project extra properties in buildscript closure"></a><a href="https://stackoverflow.com/questions/27372828/access-project-extra-properties-in-buildscript-closure" target="_blank" rel="noopener">Access project extra properties in buildscript closure</a></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">First of all buildscript block is evaluated at the very beginning, before any other part of groovy script. Hence, properties defined in ext block just does not exist at that time.</span><br><span class="line"></span><br><span class="line">Secondly, I&apos;m unsure about if exchanging properties between buildscript and other part of script is possible.</span><br></pre></td></tr></table></figure>
+<h4 id="com-android-builder-dexing-DexArchiveBuilderException-Failed-to-process-home-helios-gradle-caches-transforms-1-files-1-1"><a href="#com-android-builder-dexing-DexArchiveBuilderException-Failed-to-process-home-helios-gradle-caches-transforms-1-files-1-1" class="headerlink" title="com.android.builder.dexing.DexArchiveBuilderException: Failed to process /home/helios/.gradle/caches/transforms-1/files-1.1"></a>com.android.builder.dexing.DexArchiveBuilderException: Failed to process /home/helios/.gradle/caches/transforms-1/files-1.1</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br></pre></td><td class="code"><pre><span class="line">The dependency contains Java 8 bytecode. Please enable desugaring by adding the following to build.gradle</span><br><span class="line">android &#123;</span><br><span class="line">    compileOptions &#123;</span><br><span class="line">        sourceCompatibility 1.8</span><br><span class="line">        targetCompatibility 1.8</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">-----------------------------------------------------------------------------------------</span><br><span class="line"></span><br><span class="line">AGPBI: &#123;&quot;kind&quot;:&quot;error&quot;,&quot;text&quot;:&quot;Static interface methods are only supported starting with Android N (--min-api 24): void okhttp3.logging.HttpLoggingInterceptor$Logger.lambda$static$0(java.lang.String)&quot;,&quot;sources&quot;:[&#123;&#125;],&quot;tool&quot;:&quot;D8&quot;&#125;</span><br><span class="line">AGPBI: &#123;&quot;kind&quot;:&quot;error&quot;,&quot;text&quot;:&quot;Static interface methods are only supported starting with Android N (--min-api 24): void butterknife.Unbinder.lambda$static$0()&quot;,&quot;sources&quot;:[&#123;&#125;],&quot;tool&quot;:&quot;D8&quot;&#125;</span><br><span class="line">AGPBI: &#123;&quot;kind&quot;:&quot;error&quot;,&quot;text&quot;:&quot;Invoke-customs are only supported starting with Android O (--min-api 26)&quot;,&quot;sources&quot;:[&#123;&#125;],&quot;tool&quot;:&quot;D8&quot;&#125;</span><br><span class="line">AGPBI: &#123;&quot;kind&quot;:&quot;error&quot;,&quot;text&quot;:&quot;Static interface methods are only supported starting with Android N (--min-api 24): java.util.List okhttp3.Dns.lambda$static$0(java.lang.String)&quot;,&quot;sources&quot;:[&#123;&#125;],&quot;tool&quot;:&quot;D8&quot;&#125;</span><br><span class="line">AGPBI: &#123;&quot;kind&quot;:&quot;error&quot;,&quot;text&quot;:&quot;Invoke-customs are only supported starting with Android O (--min-api 26)&quot;,&quot;sources&quot;:[&#123;&#125;],&quot;tool&quot;:&quot;D8&quot;&#125;</span><br><span class="line">AGPBI: &#123;&quot;kind&quot;:&quot;error&quot;,&quot;text&quot;:&quot;Static interface methods are only supported starting with Android N (--min-api 24): okhttp3.Request okhttp3.Authenticator.lambda$static$0(okhttp3.Route, okhttp3.Response)&quot;,&quot;sources&quot;:[&#123;&#125;],&quot;tool&quot;:&quot;D8&quot;&#125;</span><br><span class="line">AGPBI: &#123;&quot;kind&quot;:&quot;error&quot;,&quot;text&quot;:&quot;Invoke-customs are only supported starting with Android O (--min-api 26)&quot;,&quot;sources&quot;:[&#123;&#125;],&quot;tool&quot;:&quot;D8&quot;&#125;</span><br><span class="line">com.android.builder.dexing.DexArchiveBuilderException: com.android.builder.dexing.DexArchiveBuilderException: Failed to process /home/helios/.gradle/caches/transforms-1/files-1.1/okhttp-3.14.0.jar/5eeabddfd3b1908af5d33e9b77a75bc8/jetified-okhttp-3.14.0.jar</span><br><span class="line">	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)</span><br><span class="line">	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)</span><br><span class="line">	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)</span><br><span class="line">	at java.lang.reflect.Constructor.newInstance(Constructor.java:423)</span><br><span class="line">	at java.util.concurrent.ForkJoinTask.getThrowableException(ForkJoinTask.java:593)</span><br><span class="line">	at java.util.concurrent.ForkJoinTask.reportException(ForkJoinTask.java:677)</span><br><span class="line">	at java.util.concurrent.ForkJoinTask.join(ForkJoinTask.java:720)</span><br><span class="line">	at com.android.ide.common.internal.WaitableExecutor.waitForTasksWithQuickFail(WaitableExecutor.java:146)</span><br><span class="line">	at com.android.build.gradle.internal.transforms.DexArchiveBuilderTransform.transform(DexArchiveBuilderTransform.java:405)</span><br><span class="line">	at com.android.build.gradle.internal.pipeline.TransformTask$2.call(TransformTask.java:239)</span><br><span class="line">	at com.android.build.gradle.internal.pipeline.TransformTask$2.call(TransformTask.java:235)</span><br><span class="line">	at com.android.builder.profile.ThreadRecorder.record(ThreadRecorder.java:102)</span><br><span class="line">	at com.android.build.gradle.internal.pipeline.TransformTask.transform(TransformTask.java:230)</span><br><span class="line">	at sun.reflect.GeneratedMethodAccessor1456.invoke(Unknown Source)</span><br><span class="line">	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)</span><br><span class="line">	at java.lang.reflect.Method.invoke(Method.java:498)</span><br><span class="line">	at org.gradle.internal.reflect.JavaMethod.invoke(JavaMethod.java:73)</span><br><span class="line">	at org.gradle.api.internal.project.taskfactory.IncrementalTaskAction.doExecute(IncrementalTaskAction.java:50)</span><br><span class="line">	at org.gradle.api.internal.project.taskfactory.StandardTaskAction.execute(StandardTaskAction.java:39)</span><br><span class="line">	at org.gradle.api.internal.project.taskfactory.StandardTaskAction.execute(StandardTaskAction.java:26)</span><br><span class="line">	at org.gradle.api.internal.tasks.execution.ExecuteActionsTaskExecuter$1.run(ExecuteActionsTaskExecuter.java:124)</span><br><span class="line">	at org.gradle.internal.progress.DefaultBuildOperationExecutor$RunnableBuildOperationWorker.execute(DefaultBuildOperationExecutor.java:336)</span><br><span class="line">	at org.gradle.internal.progress.DefaultBuildOperationExecutor$RunnableBuildOperationWorker.execute(DefaultBuildOperationExecutor.java:328)</span><br><span class="line">	at org.gradle.internal.progress.DefaultBuildOperationExecutor.execute(DefaultBuildOperationExecutor.java:199)</span><br><span class="line">	at org.gradle.internal.progress.DefaultBuildOperationExecutor.run(DefaultBuildOperationExecutor.java:110)</span><br><span class="line">	at org.gradle.api.internal.tasks.execution.ExecuteActionsTaskExecuter.executeAction(ExecuteActionsTaskExecuter.java:113)</span><br><span class="line">	at org.gradle.api.internal.tasks.execution.ExecuteActionsTaskExecuter.executeActions(ExecuteActionsTaskExecuter.java:95)</span><br><span class="line">	at org.gradle.api.internal.tasks.execution.ExecuteActionsTaskExecuter.execute(ExecuteActionsTaskExecuter.java:73)</span><br><span class="line">	at org.gradle.api.internal.tasks.execution.OutputDirectoryCreatingTaskExecuter.execute(OutputDirectoryCreatingTaskExecuter.java:51)</span><br><span class="line">	at org.gradle.api.internal.tasks.execution.SkipUpToDateTaskExecuter.execute(SkipUpToDateTaskExecuter.java:59)</span><br><span class="line">	at org.gradle.api.internal.tasks.execution.ResolveTaskOutputCachingStateExecuter.execute(ResolveTaskOutputCachingStateExecuter.java:54)</span><br><span class="line">	at org.gradle.api.internal.tasks.execution.ValidatingTaskExecuter.execute(ValidatingTaskExecuter.java:59)</span><br><span class="line">	at org.gradle.api.internal.tasks.execution.SkipEmptySourceFilesTaskExecuter.execute(SkipEmptySourceFilesTaskExecuter.java:101)</span><br><span class="line">	at org.gradle.api.internal.tasks.execution.FinalizeInputFilePropertiesTaskExecuter.execute(FinalizeInputFilePropertiesTaskExecuter.java:44)</span><br><span class="line">	at org.gradle.api.internal.tasks.execution.CleanupStaleOutputsExecuter.execute(CleanupStaleOutputsExecuter.java:91)</span><br><span class="line">	at org.gradle.api.internal.tasks.execution.ResolveTaskArtifactStateTaskExecuter.execute(ResolveTaskArtifactStateTaskExecuter.java:62)</span><br><span class="line">	at org.gradle.api.internal.tasks.execution.SkipTaskWithNoActionsExecuter.execute(SkipTaskWithNoActionsExecuter.java:59)</span><br><span class="line">	at org.gradle.api.internal.tasks.execution.SkipOnlyIfTaskExecuter.execute(SkipOnlyIfTaskExecuter.java:54)</span><br><span class="line">	at org.gradle.api.internal.tasks.execution.ExecuteAtMostOnceTaskExecuter.execute(ExecuteAtMostOnceTaskExecuter.java:43)</span><br><span class="line">	at org.gradle.api.internal.tasks.execution.CatchExceptionTaskExecuter.execute(CatchExceptionTaskExecuter.java:34)</span><br><span class="line">	at org.gradle.execution.taskgraph.DefaultTaskGraphExecuter$EventFiringTaskWorker$1.run(DefaultTaskGraphExecuter.java:256)</span><br><span class="line">	at org.gradle.internal.progress.DefaultBuildOperationExecutor$RunnableBuildOperationWorker.execute(DefaultBuildOperationExecutor.java:336)</span><br><span class="line">	at org.gradle.internal.progress.DefaultBuildOperationExecutor$RunnableBuildOperationWorker.execute(DefaultBuildOperationExecutor.java:328)</span><br><span class="line">	at org.gradle.internal.progress.DefaultBuildOperationExecutor.execute(DefaultBuildOperationExecutor.java:199)</span><br><span class="line">	at org.gradle.internal.progress.DefaultBuildOperationExecutor.run(DefaultBuildOperationExecutor.java:110)</span><br><span class="line">	at org.gradle.execution.taskgraph.DefaultTaskGraphExecuter$EventFiringTaskWorker.execute(DefaultTaskGraphExecuter.java:249)</span><br><span class="line">	at org.gradle.execution.taskgraph.DefaultTaskGraphExecuter$EventFiringTaskWorker.execute(DefaultTaskGraphExecuter.java:238)</span><br><span class="line">	at org.gradle.execution.taskgraph.DefaultTaskPlanExecutor$TaskExecutorWorker.processTask(DefaultTaskPlanExecutor.java:123)</span><br><span class="line">	at org.gradle.execution.taskgraph.DefaultTaskPlanExecutor$TaskExecutorWorker.access$200(DefaultTaskPlanExecutor.java:79)</span><br><span class="line">	at org.gradle.execution.taskgraph.DefaultTaskPlanExecutor$TaskExecutorWorker$1.execute(DefaultTaskPlanExecutor.java:104)</span><br><span class="line">	at org.gradle.execution.taskgraph.DefaultTaskPlanExecutor$TaskExecutorWorker$1.execute(DefaultTaskPlanExecutor.java:98)</span><br><span class="line">	at org.gradle.execution.taskgraph.DefaultTaskExecutionPlan.execute(DefaultTaskExecutionPlan.java:663)</span><br><span class="line">	at org.gradle.execution.taskgraph.DefaultTaskExecutionPlan.executeWithTask(DefaultTaskExecutionPlan.java:597)</span><br><span class="line">	at org.gradle.execution.taskgraph.DefaultTaskPlanExecutor$TaskExecutorWorker.run(DefaultTaskPlanExecutor.java:98)</span><br><span class="line">	at org.gradle.internal.concurrent.ExecutorPolicy$CatchAndRecordFailures.onExecute(ExecutorPolicy.java:63)</span><br><span class="line">	at org.gradle.internal.concurrent.ManagedExecutorImpl$1.run(ManagedExecutorImpl.java:46)</span><br><span class="line">	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)</span><br><span class="line">	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)</span><br><span class="line">	at org.gradle.internal.concurrent.ThreadFactoryImpl$ManagedThreadRunnable.run(ThreadFactoryImpl.java:55)</span><br><span class="line">	at java.lang.Thread.run(Thread.java:745)</span><br><span class="line">Caused by: com.android.builder.dexing.DexArchiveBuilderException: Failed to process /home/helios/.gradle/caches/transforms-1/files-1.1/okhttp-3.14.0.jar/5eeabddfd3b1908af5d33e9b77a75bc8/jetified-okhttp-3.14.0.jar</span><br><span class="line">	at com.android.build.gradle.internal.transforms.DexArchiveBuilderTransform.launchProcessing(DexArchiveBuilderTransform.java:900)</span><br><span class="line">	at com.android.build.gradle.internal.transforms.DexArchiveBuilderTransform.lambda$convertToDexArchive$6(DexArchiveBuilderTransform.java:825)</span><br><span class="line">	at java.util.concurrent.ForkJoinTask$AdaptedCallable.exec(ForkJoinTask.java:1424)</span><br><span class="line">	at java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:289)</span><br><span class="line">	at java.util.concurrent.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1056)</span><br><span class="line">	at java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1692)</span><br><span class="line">	at java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:157)</span><br><span class="line">Caused by: com.android.builder.dexing.DexArchiveBuilderException: Error while dexing.</span><br><span class="line">The dependency contains Java 8 bytecode. Please enable desugaring by adding the following to build.gradle</span><br><span class="line">android &#123;</span><br><span class="line">    compileOptions &#123;</span><br><span class="line">        sourceCompatibility 1.8</span><br><span class="line">        targetCompatibility 1.8</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">See https://developer.android.com/studio/write/java8-support.html for details. Alternatively, increase the minSdkVersion to 26 or above.</span><br><span class="line"></span><br><span class="line">	at com.android.builder.dexing.D8DexArchiveBuilder.getExceptionToRethrow(D8DexArchiveBuilder.java:124)</span><br><span class="line">	at com.android.builder.dexing.D8DexArchiveBuilder.convert(D8DexArchiveBuilder.java:101)</span><br><span class="line">	at com.android.build.gradle.internal.transforms.DexArchiveBuilderTransform.launchProcessing(DexArchiveBuilderTransform.java:895)</span><br><span class="line">	... 6 more</span><br><span class="line">Caused by: com.android.tools.r8.CompilationFailedException: Compilation failed to complete</span><br><span class="line">	at com.android.tools.r8.utils.ExceptionUtils.withCompilationHandler(ExceptionUtils.java:65)</span><br><span class="line">	at com.android.tools.r8.utils.ExceptionUtils.withD8CompilationHandler(ExceptionUtils.java:43)</span><br><span class="line">	at com.android.tools.r8.D8.run(D8.java:90)</span><br><span class="line">	at com.android.builder.dexing.D8DexArchiveBuilder.convert(D8DexArchiveBuilder.java:99)</span><br><span class="line">	... 7 more</span><br><span class="line">Caused by: com.android.tools.r8.utils.AbortException: Error: Invoke-customs are only supported starting with Android O (--min-api 26)</span><br><span class="line">	at com.android.tools.r8.utils.Reporter.failIfPendingErrors(Reporter.java:116)</span><br><span class="line">	at com.android.tools.r8.utils.Reporter.fatalError(Reporter.java:74)</span><br><span class="line">	at com.android.tools.r8.utils.ExceptionUtils.withCompilationHandler(ExceptionUtils.java:59)</span><br><span class="line">	... 10 more</span><br><span class="line"></span><br><span class="line">:driver:transformClassesWithDexBuilderForDebug FAILED</span><br><span class="line"></span><br><span class="line">FAILURE: Build failed with an exception.</span><br><span class="line"></span><br><span class="line">* What went wrong:</span><br><span class="line">Execution failed for task &apos;:driver:transformClassesWithDexBuilderForDebug&apos;.</span><br><span class="line">&gt; com.android.build.api.transform.TransformException: com.android.builder.dexing.DexArchiveBuilderException: com.android.builder.dexing.DexArchiveBuilderException: Failed to process /home/helios/.gradle/caches/transforms-1/files-1.1/okhttp-3.14.0.jar/5eeabddfd3b1908af5d33e9b77a75bc8/jetified-okhttp-3.14.0.jar</span><br><span class="line"></span><br><span class="line">* Try:</span><br><span class="line">Run with --stacktrace option to get the stack trace. Run with --info or --debug option to get more log output. Run with --scan to get full insights.</span><br><span class="line"></span><br><span class="line">* Get more help at https://help.gradle.org</span><br><span class="line"></span><br><span class="line">BUILD FAILED in 4s</span><br><span class="line">38 actionable tasks: 35 executed, 3 up-to-date</span><br></pre></td></tr></table></figure>
+<h4 id="NoClassDefFoundError-Failed-resolution-of-Landroidx-databinding-DataBinderMapperImpl"><a href="#NoClassDefFoundError-Failed-resolution-of-Landroidx-databinding-DataBinderMapperImpl" class="headerlink" title="NoClassDefFoundError: Failed resolution of: Landroidx/databinding/DataBinderMapperImpl;"></a>NoClassDefFoundError: Failed resolution of: Landroidx/databinding/DataBinderMapperImpl;</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">module是是用的mvvm,app也得配置:</span><br><span class="line"></span><br><span class="line">dataBinding &#123;</span><br><span class="line">        enabled =true</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+	  
+
+	  <div>
+  		<center>
+		  <div class="pagination">
+<ul class="pagination">
+	
+	
+	
+	
+	
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+			
+		
+	
+		
+			
+			
+			
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+	
+	
+		<li class="prev"><a href="/2018/07/04/react native github libs/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>prev</a></li>
+	
+	<li><a href="/"><i class="fa fa-archive"></i>Home</a></li>
+	
+		<li class="next"><a href="/2018/06/11/oracle-sql/" class="alignright next">next<i class="fa fa-arrow-circle-o-right"></i></a></li>
+	
+</ul>
+</div>
+
+		</center>
+	  </div>
+	  
+	</div> <!-- col-md-9/col-md-12 -->
+	
+  </div><!-- row -->
+
+	</div>
+  </div>
+  <div class="container-narrow">
+	<footer> <p>
+  &copy; 2019 rex
+  
+      with help from <a href="http://zespia.tw/hexo/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-wixo/">Wixo</a>.    
+</p> </footer>
+  </div> <!-- container-narrow -->
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/jquery.tableofcontents.min.js"></script>
+<script src="/js/tocgenerator.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+
+</body>
+</html>

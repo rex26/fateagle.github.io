@@ -1,0 +1,464 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Rex的博客</title>
+  <meta name="author" content="rex">
+  
+  <meta name="description" content="壹&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;解决分辨率的问题
+用到的命令有：
+    lspci -vnn | grep VGA -A 12
+    lshw -C display
+
+网上到帖子一：
+Ubuntu16.04分辨率过低，无法">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+  <meta property="og:site_name" content="Rex的博客"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="Rex的博客" type="application/atom+xml">
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">  
+  <link rel="stylesheet" href="/css/sidenav.css" media="screen" type="text/css">  
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+
+</head>
+
+<body id="body" data-spy="scroll" data-target=".toc">
+  <div class="container" id="container">
+	<div class="content">
+	  <div class="page-header">		
+  <h1><a class="brand" href="/">Rex的博客</a><span class="split"></span><span class="title"></span><span class="date" id="title-date"><i class="fa fa-clock-o"></i> 2019-04-01</span></h1>
+</div>		
+
+<div class="row page">
+  <!-- cols -->	
+  
+  
+
+  
+	<div class="col-md-12">
+	  
+
+	  <!-- content -->
+	  <h2 id="壹-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-解决分辨率的问题"><a href="#壹-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-解决分辨率的问题" class="headerlink" title="壹&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;解决分辨率的问题"></a>壹&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;解决分辨率的问题</h2><pre>
+用到的命令有：
+    lspci -vnn | grep VGA -A 12
+    lshw -C display
+
+网上到帖子一：
+Ubuntu16.04分辨率过低，无法调高
+http://blog.csdn.net/XinyanH/article/details/78330853
+1.用sudo lshw -c video查看
+正常的显示应该是：
+*-display               
+       description: VGA compatible controller
+       product: Cedar [Radeon HD 7350/8350 / R5 220]
+       ..........此处省略一万字
+而我的显示的是display UNCLAIMED：
+*-display UNCLAIMED     
+       description: 3D controller
+       product: GM107M [GeForce GTX 950M]
+       vendor: NVIDIA Corporation
+    ..........此处省略一万字
+
+2.用sudo lshw -c video | grep configuration查看
+rex@rex:/usr/java$ sudo lshw -c video | grep configuration
+       configuration: latency=0
+       configuration: latency=0
+结论：没有显示驱动，所以应该是驱动出了问题，需要安装驱动
+
+3.AMD显卡，可能解决的路径：
+安装方法为（http://support.amd.com/en-us/kb-articles/Pages/AMDGPU-PRO-Install.aspx），在该网页中，安装前需要运行如下命令：
+    sudo apt update
+    sudo apt dist-upgrade
+    sudo reboot
+</pre>
+
+
+
+
+
+<h2 id="贰-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-我的是N卡，官网为：http-www-nvidia-cn"><a href="#贰-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-我的是N卡，官网为：http-www-nvidia-cn" class="headerlink" title="贰&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;我的是N卡，官网为：http://www.nvidia.cn"></a>贰&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;我的是N卡，官网为：<a href="http://www.nvidia.cn" target="_blank" rel="noopener">http://www.nvidia.cn</a></h2><pre><code>然后找到地址：https://www.geforce.cn/drivers--这个页面有“自动检测GPU”的按钮
+！但是需要安装java
+</code></pre><h2 id="叁-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-安装java（但下载到的是rpm包）"><a href="#叁-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-安装java（但下载到的是rpm包）" class="headerlink" title="叁&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;安装java（但下载到的是rpm包）"></a>叁&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;安装java（但下载到的是rpm包）</h2><pre><code>简单来说，Ubuntu的软件包格式是deb，如果要安装rpm的包，则要先用alien把rpm转换成deb。
+sudo apt-get install alien #alien默认没有安装，所以首先要安装它
+sudo alien xxxx.rpm #将rpm转换位deb，完成后会生成一个同名的xxxx.deb
+sudo dpkg -i xxxx.deb #安装
+</code></pre><h2 id="肆-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-解压-如果下载到的是tar-gz-："><a href="#肆-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-解压-如果下载到的是tar-gz-：" class="headerlink" title="肆&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;解压(如果下载到的是tar.gz)："></a>肆&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;解压(如果下载到的是tar.gz)：</h2><pre>
+ZIP
+    zip可能是目前使用得最多的文档压缩格式。它最大的优点就是在不同的操作系统平台，比如Linux， Windows以及Mac OS，上使用。缺点就是支持的压缩率不是很高，而tar.gz和tar.gz2在压缩率方面做得非常好。闲话少说，我们步入正题吧：
+我们可以使用下列的命令压缩一个目录：
+# zip -r archive_name.zip directory_to_compress
+下面是如果解压一个zip文档：
+# unzip archive_name.zip
+
+TAR
+    Tar是在Linux中使用得非常广泛的文档打包格式。它的好处就是它只消耗非常少的CPU以及时间去打包文件，他仅仅只是一个打包工具，并不负责压缩。下面是如何打包一个目录：
+# tar -cvf archive_name.tar directory_to_compress
+如何解包：
+# tar -xvf archive_name.tar.gz
+上面这个解包命令将会将文档解开在当前目录下面。当然，你也可以用这个命令来捏住解包的路径：
+# tar -xvf archive_name.tar -C /tmp/extract_here/
+
+TAR.GZ
+    这种格式是我使用得最多的压缩格式。它在压缩时不会占用太多CPU的，而且可以得到一个非常理想的压缩率。使用下面这种格式去压缩一个目录：
+# tar -zcvf archive_name.tar.gz directory_to_compress
+解压缩：
+# tar -zxvf archive_name.tar.gz
+上面这个解包命令将会将文档解开在当前目录下面。当然，你也可以用这个命令来捏住解包的路径：
+# tar -zxvf archive_name.tar.gz -C /tmp/extract_here/
+
+TAR.BZ2
+    这种压缩格式是我们提到的所有方式中压缩率最好的。当然，这也就意味着，它比前面的方式要占用更多的CPU与时间。这个就是你如何使用tar.bz2进行压缩。
+# tar -jcvf archive_name.tar.bz2 directory_to_compress
+上面这个解包命令将会将文档解开在当前目录下面。当然，你也可以用这个命令来捏住解包的路径：
+# tar -jxvf archive_name.tar.bz2 -C /tmp/extract_here/
+</pre>
+
+<h2 id="伍-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-配置java："><a href="#伍-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-配置java：" class="headerlink" title="伍&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;配置java："></a>伍&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;配置java：</h2><pre>
+sudo gedit  /etc/profile
+
+export JAVA_HOME=/usr/java/jdk1.8.0_151
+export CLASSPATH=.:$JAVA_HOME/lib:$JAVA_HOME/jre/lib:$CLASSPATH
+export PATH=$JAVA_HOME/bin:$JAVA_HOME/jre/bin:$PATH
+
+sudo source /etc/profile 
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/bin</span><br><span class="line">ln -s -f /usr/****/jdk1.8.0_45/jre/bin/java</span><br><span class="line">ln -s -f /usr/****/jdk1.8.0_45/bin/javac</span><br></pre></td></tr></table></figure>
+
+</pre>
+
+<h2 id="陆-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-发现firefox仍然无法检测到java，换Chromium"><a href="#陆-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-发现firefox仍然无法检测到java，换Chromium" class="headerlink" title="陆&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;发现firefox仍然无法检测到java，换Chromium"></a>陆&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;发现firefox仍然无法检测到java，换Chromium</h2><pre>
+    Ubuntu 16.04下安装Chromium浏览器，可以通过“Ubuntu软件中心”搜索安装。但这样安装的Chromium浏览器版本比较旧了。我们可以通过ppa，安装最新版本的Chromium浏览器。
+Ubuntu 16.04下安装64位谷歌Chrome浏览器 http://www.linuxidc.com/Linux/2016-05/131096.htm
+Ubuntu 16.04中安装Chromium浏览器  http://www.linuxidc.com/Linux/2016-05/131097.htm
+Ubuntu 16.04中为Chromium、Chrome、Firefox安装Flash播放器插件  http://www.linuxidc.com/Linux/2016-05/131098.htm
+在终端中依次运行如下命令：
+sudo add-apt-repository ppa:a-v-shkop/chromium
+sudo apt-get update
+</pre>
+
+<h2 id="柒-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-chromium和chrome的区别："><a href="#柒-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-chromium和chrome的区别：" class="headerlink" title="柒&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;chromium和chrome的区别："></a>柒&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;chromium和chrome的区别：</h2><pre>
+新功能先在chromium出现，而chromium是谷歌的开源项目，有很多开发者共同的去改进，谷歌收集改进后会发布安装包，也就是chromium，然后会将chromium的东西更新到chrome中，chrome不是开源项目，而在chrome内的更新也有一个过程，先更新到chrome的金丝雀版（未验证bug），接着到dev版（大问题已经验证），接着beta（小问题已经验证），都没问题了，再更新到稳定版。
+</pre>
+
+<h2 id="捌-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-关闭触摸板"><a href="#捌-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-关闭触摸板" class="headerlink" title="捌&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;关闭触摸板"></a>捌&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;关闭触摸板</h2><pre>
+笔记本上的触摸板经常导致误操作，禁止和开启的方法如下：
+sudo modprobe psmouse 开启触摸板
+sudo modprobe -r psmouse 关闭触摸板 ------管用-赞
+另一个办法是安装touchpad-indicator：
+sudo add-apt-repository ppa:atareao/atareao
+sudo apt-get update
+sudo apt-get install touchpad-indicator
+还有一种方法就是使用FN键来开启和关闭触摸板，我到电脑是fn+esc来切换。
+</pre>
+
+<h2 id="玖-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-ppa下载chromium失败，"><a href="#玖-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-gt-ppa下载chromium失败，" class="headerlink" title="玖&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;ppa下载chromium失败，"></a>玖&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;ppa下载chromium失败，</h2><pre>
+1.在软件更新界面 移除chromium的ppa
+2.cd /etc/apt/sources.list.d
+rex@rex:/etc/apt/sources.list.d$ ll
+总用量 8
+... 13:09 ./
+... 10 12:49 ../
+... 10 13:09 a-v-shkop-ubuntu-chromium-xenial.list
+... 10 13:09 a-v-shkop-ubuntu-chromium-xenial.list.save
+
+$ sudo rm *
+3.直接去搜索下载chome来安装
+</pre>
+
+<h2 id="11-浏览器打开之后仍然无法检测到Java，怀疑执行了source-etc-profile，而不是："><a href="#11-浏览器打开之后仍然无法检测到Java，怀疑执行了source-etc-profile，而不是：" class="headerlink" title="11.浏览器打开之后仍然无法检测到Java，怀疑执行了source /etc/profile，而不是："></a>11.浏览器打开之后仍然无法检测到Java，怀疑执行了source /etc/profile，而不是：</h2><pre>
+sudo source /etc/profile，但是执行后说：sudo: source：找不到命令，
+那么执行su，切换到root，但是：su:认证失败
+</pre>
+
+<h2 id="12-ubuntu系统开root以及（su-认证失败）完美："><a href="#12-ubuntu系统开root以及（su-认证失败）完美：" class="headerlink" title="12.ubuntu系统开root以及（su:认证失败）完美："></a>12.ubuntu系统开root以及（su:认证失败）完美：</h2><pre>
+    $ sudo passwd root
+只是执行source /etc/profile后还是java/javac还是不行，配置得不对
+</pre>
+
+<h2 id="13-java环境变量配置"><a href="#13-java环境变量配置" class="headerlink" title="13.java环境变量配置"></a>13.java环境变量配置</h2><pre>
+这里采用全局设置方法，它是是所有用户的共用的环境变量
+
+$sudo gedit ~/.bashrc
+export JAVA_HOME=/usr/java/jdk1.8.0_151
+export CLASSPATH=.:$JAVA_HOME/lib:$JAVA_HOME/jre/lib:$CLASSPATH
+export PATH=$JAVA_HOME/bin:$JAVA_HOME/jre/bin:$PATH
+
+source ~/.bashrc
+最后仍然无法检测，那就自己下载安装吧
+</pre>
+
+<h2 id="14-安装显卡驱动"><a href="#14-安装显卡驱动" class="headerlink" title="14.安装显卡驱动"></a>14.安装显卡驱动</h2><pre>
+在软件和更新 那里选择附加驱动就是了
+</pre>
+
+<h2 id="15-Ubuntu安装NVIDIA驱动后桌面循环登录问题"><a href="#15-Ubuntu安装NVIDIA驱动后桌面循环登录问题" class="headerlink" title="15.Ubuntu安装NVIDIA驱动后桌面循环登录问题"></a>15.Ubuntu安装NVIDIA驱动后桌面循环登录问题</h2><pre>
+Ctrl-Alt+F1
+sudo apt-get remove –purge nvidia*
+sudo reboot
+</pre>
+
+<h2 id="16-安装vim"><a href="#16-安装vim" class="headerlink" title="16.安装vim"></a>16.安装vim</h2><pre>
+sudo apt-get install vim 
+</pre>
+
+<h2 id="17-另一种安装驱动的方式"><a href="#17-另一种安装驱动的方式" class="headerlink" title="17.另一种安装驱动的方式"></a>17.另一种安装驱动的方式</h2><pre>
+1）把nouveau驱动加入黑名单，即在/etc/modprobe.d/blacklist.conf的后面加入：
+blacklist nouveau 
+2）备份initramfs文件
+sudo mv /boot/initramfs-$(uname -r).img /boot/initramfs-$(uname -r).img.bat
+3)重新建立initramfs文件
+sudo dracut -v /boot/initramfs-$(uname -r).img $(uname -r)
+$ sudo update-initramfs -u  ---我自己加的（sudo apt-get install dracut）
+4)检查nouveau驱动，确保没有被加载
+lsmod | grep nouveau
+
+
+
+
+
+mv /boot/initramfs-$(uname -r).img /boot/initramfs-$(uname -r).img.bak
+dracut -v /boot/initramfs-$(uname -r).img $(uname -r)
+
+
+http://blog.csdn.net/Perky_mango/article/details/51863618
+https://zhidao.baidu.com/question/620332907672236772.html
+http://blog.csdn.net/XinyanH/article/details/78330853
+http://www.linuxidc.com/Linux/2016-12/138907.htm
+http://blog.csdn.net/jasonzhangoo/article/details/54866049
+http://blog.csdn.net/u010159842/article/details/54344683
+http://blog.csdn.net/irlwh/article/details/52739821
+
+</pre>
+
+<h2 id="18-gedit打开有些txt文件乱码（注意分为2种版本）"><a href="#18-gedit打开有些txt文件乱码（注意分为2种版本）" class="headerlink" title="18.gedit打开有些txt文件乱码（注意分为2种版本）"></a>18.gedit打开有些txt文件乱码（注意分为2种版本）</h2><pre>
+https://wiki.ubuntu.com.cn/Gedit%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81
+</pre>
+
+<h2 id="19-安装git"><a href="#19-安装git" class="headerlink" title="19.安装git"></a>19.安装git</h2><pre>
+https://git-scm.com/download/linux
+For Ubuntu, this PPA provides the latest stable upstream Git version
+# sudo add-apt-repository ppa:git-core/ppa 
+# sudo apt update; sudo apt install git
+</pre>
+
+<h2 id="20-解决linux-ubuntu-使用teamviewer11-中文乱码问题-Failed"><a href="#20-解决linux-ubuntu-使用teamviewer11-中文乱码问题-Failed" class="headerlink" title="20.解决linux ubuntu 使用teamviewer11 中文乱码问题(Failed)"></a>20.<strong><em><del>解决linux ubuntu 使用teamviewer11 中文乱码问题(Failed)</del></em></strong></h2><pre>
+https://chenkaihua.com/2015/12/21/solve-the-problem-of-linux-ubuntu1404-use-teamviewer-chinese-garbled/
+
+出现原因:字体缺失，teamviewer使用的是宋体字体，但是在teamviewer字体目录下没有这个字体
+1 windows上或者网络上下载宋体字体(simsun.ttc,simsun.ttf)
+    wget http://down5.pc6.com/qd3/simsun.zip
+    unzip simsun.zip
+2.把字体复制到/opt/teamviewer/tv_bin/wine/share/wine/fonts目录
+    sudo cp simsun.tt* /opt/teamviewer/tv_bin/wine/share/wine/fonts/
+3.重启teamviewer
+</pre>
+
+<h2 id="21-设置lantern代理-https-www-jianshu-com-p-e9d461b8019d"><a href="#21-设置lantern代理-https-www-jianshu-com-p-e9d461b8019d" class="headerlink" title="21.设置lantern代理 https://www.jianshu.com/p/e9d461b8019d"></a>21.设置lantern代理 <a href="https://www.jianshu.com/p/e9d461b8019d" target="_blank" rel="noopener">https://www.jianshu.com/p/e9d461b8019d</a></h2><pre>
+蓝灯在浏览器打开的页面，会有个设置按钮，打开就可以看得到对应的代理ip和端口，复制到Android studio就好了
+</pre>
+
+<h2 id="22-google"><a href="#22-google" class="headerlink" title="22.google"></a>22.google</h2><h2 id="23-修改grub默认启动顺序"><a href="#23-修改grub默认启动顺序" class="headerlink" title="23.修改grub默认启动顺序"></a>23.修改grub默认启动顺序</h2><pre>
+使用“sudo vim /etc/default/grub”命令打开该配置文件。
+#启动顺序从0开始，修改这个就可以了
+
+GRUB_DEFAULT=0
+
+修改完成，保存退出之后，还需要执行一下“sudo update-grub”来重新生成GRUB启动配置项。
+</pre>
+
+<h2 id="24-文件类型"><a href="#24-文件类型" class="headerlink" title="24.文件类型"></a>24.文件类型</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">d ：目录 </span><br><span class="line">- ：文件 </span><br><span class="line">l ：链接 </span><br><span class="line">s ：socket </span><br><span class="line">p ：named pipe </span><br><span class="line">b ：block device </span><br><span class="line">c  ：character device</span><br></pre></td></tr></table></figure>
+	  
+
+	  <div>
+  		<center>
+		  <div class="pagination">
+<ul class="pagination">
+	
+	
+	
+	
+	
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+			
+		
+	
+		
+			
+			
+			
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+	
+	
+		<li class="prev"><a href="/2019/04/01/Ubuntu 18.04/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>prev</a></li>
+	
+	<li><a href="/"><i class="fa fa-archive"></i>Home</a></li>
+	
+		<li class="next"><a href="/2019/04/01/android libs/" class="alignright next">next<i class="fa fa-arrow-circle-o-right"></i></a></li>
+	
+</ul>
+</div>
+
+		</center>
+	  </div>
+	  
+	</div> <!-- col-md-9/col-md-12 -->
+	
+  </div><!-- row -->
+
+	</div>
+  </div>
+  <div class="container-narrow">
+	<footer> <p>
+  &copy; 2019 rex
+  
+      with help from <a href="http://zespia.tw/hexo/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-wixo/">Wixo</a>.    
+</p> </footer>
+  </div> <!-- container-narrow -->
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/jquery.tableofcontents.min.js"></script>
+<script src="/js/tocgenerator.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+
+</body>
+</html>

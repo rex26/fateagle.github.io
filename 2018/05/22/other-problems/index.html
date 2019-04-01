@@ -74,19 +74,13 @@ File-&amp;gt;Settings-&amp;gt;Plugin-&amp;">
 <h4 id="Intellij-阿里编码风格检测"><a href="#Intellij-阿里编码风格检测" class="headerlink" title="Intellij 阿里编码风格检测"></a>Intellij 阿里编码风格检测</h4><blockquote>
 <p>File-&gt;Settings-&gt;Plugin-&gt; search “<strong>alibaba</strong>“</p>
 </blockquote>
-<h4 id="vs-code-代码迁移到webstorm"><a href="#vs-code-代码迁移到webstorm" class="headerlink" title="vs code 代码迁移到webstorm"></a>vs code 代码迁移到webstorm</h4><blockquote>
-<p>除了node-modules/.vscode 文件夹都可以复制过去</p>
-<p>yarn install</p>
-<p>react-native link</p>
-<p>react-native link react-native-fs</p>
-<p>Android Studio打开Android项目:sync gradle-&gt;clean-&gt; rebuild</p>
-<p>Terminal-&gt; react-native run-android</p>
-</blockquote>
 <h4 id="Android-Studio-使用阿里的maven下载不了"><a href="#Android-Studio-使用阿里的maven下载不了" class="headerlink" title="Android Studio 使用阿里的maven下载不了"></a>Android Studio 使用阿里的maven下载不了</h4><blockquote>
 <p>把设置里面的代理关闭, 还有这里的:gradle.properties</p>
 </blockquote>
-<h4 id="IDEA-Error-1-1-错误-需要class-interface或enum"><a href="#IDEA-Error-1-1-错误-需要class-interface或enum" class="headerlink" title="IDEA Error:(1, 1) 错误: 需要class, interface或enum"></a>IDEA Error:(1, 1) 错误: 需要class, interface或enum</h4><blockquote>
+<h4 id="IDEA-Error-1-1-错误-需要class-interface或enum"><a href="#IDEA-Error-1-1-错误-需要class-interface或enum" class="headerlink" title="IDEA Error:(1, 1) 错误: 需要class, interface或enum"></a>IDEA Error:(1, 1) 错误: 需要class, interface或enum</h4><p><strong>unclosed string literal</strong> 可能还伴有这样的提示</p>
+<blockquote>
 <p>File-&gt;Setting-&gt;File encoding-&gt;把对应的文件编码格式clear</p>
+<p>意思就是修噶一下编码</p>
 </blockquote>
 <h4 id="ORA-12638-身份证明检索失败的解决方法"><a href="#ORA-12638-身份证明检索失败的解决方法" class="headerlink" title="ORA-12638: 身份证明检索失败的解决方法"></a><a href="https://www.cnblogs.com/Sabre/p/6721180.html" target="_blank" rel="noopener">ORA-12638: 身份证明检索失败的解决方法</a></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">本地oracle客户端用PLSQL Developer连接远程数据库，每次登录都会在很久之后，出现 ORA-12638: 身份证明检索失败，tnsping 表明TNS配置没有问题。</span><br><span class="line"></span><br><span class="line">解决方案：</span><br><span class="line">D:\app\sabre\product\11.2.0\client_1\NETWORK\ADMIN</span><br><span class="line"></span><br><span class="line">此目录下找到sqlnet.ora文件，如果存在SQLNET.AUTHENTICATION_SERVICES= (NTS)设置，则修改为：SQLNET.AUTHENTICATION_SERVICES= (NONE)，如果不存在，则直接添加SQLNET.AUTHENTICATION_SERVICES= (NONE)，我的问题得以解决。</span><br><span class="line"></span><br><span class="line">SQLNET.AUTHENTICATION_SERVICES 表示oracle使用哪种验证方式，NTS表示采用本地操作系统认证，NONE表示将采用口令文件方式认证。设定了none后，本地的操作系统认证将不被许可，oracle将采用口令文件认证(此时 remote_login_passwordfile=exclusive)如connect /as sysdba 登录，后报错RA-01031: insufficient privileges，实际上是要求你输入sysdba的用户名和密码</span><br></pre></td></tr></table></figure>
 	  
@@ -107,6 +101,50 @@ File-&amp;gt;Settings-&amp;gt;Plugin-&amp;">
 	
 		
 			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
 			
 		
 	
@@ -160,7 +198,7 @@ File-&amp;gt;Settings-&amp;gt;Plugin-&amp;">
 	
 	
 	
-		<li class="prev"><a href="/2018/05/24/j2ee-problems/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>prev</a></li>
+		<li class="prev"><a href="/2018/06/07/photo-shop/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>prev</a></li>
 	
 	<li><a href="/"><i class="fa fa-archive"></i>Home</a></li>
 	
@@ -180,7 +218,7 @@ File-&amp;gt;Settings-&amp;gt;Plugin-&amp;">
   </div>
   <div class="container-narrow">
 	<footer> <p>
-  &copy; 2018 rex
+  &copy; 2019 rex
   
       with help from <a href="http://zespia.tw/hexo/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-wixo/">Wixo</a>.    
 </p> </footer>

@@ -109,10 +109,94 @@
 <p>npm i</p>
 <p>react-native run-android</p>
 </blockquote>
-<h4 id="operation-not-permitted"><a href="#operation-not-permitted" class="headerlink" title="operation not permitted,"></a>operation not permitted,</h4><p> ERROR  EPERM: operation not permitted, lstat ‘D:\RNws\test\android\app\build\intermediates\assets\debug\fonts’</p>
+<p>###operation not permitted,</p>
+<p> ERROR  EPERM: operation not permitted, lstat ‘D:\RNws\test\android\app\build\intermediates\assets\debug\fonts’</p>
 <blockquote>
 <p>CMD 需要管理员权限, 如果是IDE里面出现的话, 暂时只有将命令拿出来执行了</p>
+<p>或者把文件的权限给当前用户</p>
 </blockquote>
+<h3 id="Could-not-expand-ZIP-react-native-device-info-release-aar-react-native-run-android-src-fs-event-wrap-cc-90-Assertion-wrap-nullptr’-failed-react-native-start"><a href="#Could-not-expand-ZIP-react-native-device-info-release-aar-react-native-run-android-src-fs-event-wrap-cc-90-Assertion-wrap-nullptr’-failed-react-native-start" class="headerlink" title="Could not expand ZIP - react-native-device-info-release.aar(react-native run-android),src\fs_event_wrap.cc:90: Assertion `wrap != nullptr’ failed(react-native start)"></a>Could not expand ZIP - react-native-device-info-release.aar(react-native run-android),src\fs_event_wrap.cc:90: Assertion `wrap != nullptr’ failed(react-native start)</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd android &amp;&amp; gradlew clean</span><br></pre></td></tr></table></figure>
+<h4 id="after-clean"><a href="#after-clean" class="headerlink" title="after clean"></a>after clean</h4><p>// 清理了之后,需要npm install , react-native link xxx</p>
+<p>npm clean cache –force</p>
+<h4 id="vs-code-代码迁移到webstorm"><a href="#vs-code-代码迁移到webstorm" class="headerlink" title="vs code 代码迁移到webstorm"></a>vs code 代码迁移到webstorm</h4><blockquote>
+<p>除了node-modules/.vscode 文件夹都可以复制过去</p>
+<p>yarn install</p>
+<p>react-native link</p>
+<p>react-native link react-native-fs</p>
+<p>Android Studio打开Android项目:sync gradle-&gt;clean-&gt; rebuild</p>
+<p>Terminal-&gt; react-native run-android</p>
+</blockquote>
+<h4 id="Application-has-not-been-registered-error"><a href="#Application-has-not-been-registered-error" class="headerlink" title="Application has not been registered error"></a>Application has not been registered error</h4><p><a href="https://stackoverflow.com/questions/38340360/react-native-application-has-not-been-registered-error" target="_blank" rel="noopener">https://stackoverflow.com/questions/38340360/react-native-application-has-not-been-registered-error</a></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">index.js </span><br><span class="line"></span><br><span class="line">AppRegistry.registerComponent(<span class="string">'wlDuban'</span>, () =&gt; App);</span><br></pre></td></tr></table></figure>
+<h4 id="ENOSPC"><a href="#ENOSPC" class="headerlink" title="ENOSPC"></a>ENOSPC</h4><p>ERROR  watch /media/helios/develop/RNws/wlDuban/node_modules/react-native-fs/android/build/generated/assets ENOSPC</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf &amp;&amp; sudo sysctl -p</span><br></pre></td></tr></table></figure>
+<h4 id="tries-to-require-react-native-but-there-are-several-files-providing"><a href="#tries-to-require-react-native-but-there-are-several-files-providing" class="headerlink" title="tries to require react-native, but there are several files providing"></a>tries to require <code>react-native</code>, but there are several files providing</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Bundling `index.ios.js`  [development, non-minified]  0.0% (0/1), failed.</span><br><span class="line">error: bundling failed: ambiguous resolution: module `/Users/bingbing/Poem/PoemRN/index.ios.js` tries to require `react-native`, but there are several files providing this module. You can delete or fix them: </span><br><span class="line"></span><br><span class="line">  * `/Users/bingbing/Poem/PoemRN/node_modules/autoresponsive-react-native/node_modules/react-native/package.json`</span><br><span class="line">  * `/Users/bingbing/Poem/PoemRN/node_modules/react-native/package.json`</span><br></pre></td></tr></table></figure>
+<ul>
+<li>node_modules 下面有一个example项目是独立的， 和外面的主项目配置重复了，剪切出去即可</li>
+<li>yarn start –reset-cache</li>
+</ul>
+<h4 id="onLongPress-and-delayLongPress-triggers-immediately"><a href="#onLongPress-and-delayLongPress-triggers-immediately" class="headerlink" title="onLongPress (and delayLongPress) triggers immediately"></a>onLongPress (and delayLongPress) triggers immediately</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">When I've a long press handler on a touchable, it fires almost instantly when running in chrome dev tools.</span><br><span class="line"></span><br><span class="line">Confirming that this happens only with chrome debugger enabled.</span><br></pre></td></tr></table></figure>
+<h4 id="Native-module-VectorIconsPackage-tired-to-override-modulename-for-module-name-VectorIconsPackage-If-this-was-your-intention-setcanOverrideExistingModule-true"><a href="#Native-module-VectorIconsPackage-tired-to-override-modulename-for-module-name-VectorIconsPackage-If-this-was-your-intention-setcanOverrideExistingModule-true" class="headerlink" title="Native module VectorIconsPackage tired to override modulename for module  name VectorIconsPackage.If this was your intention,setcanOverrideExistingModule=true"></a>Native module VectorIconsPackage tired to override modulename for module  name VectorIconsPackage.If this was your intention,setcanOverrideExistingModule=true</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">MainApplication 的 getPackages 重复了</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">protected</span> List&lt;ReactPackage&gt; <span class="title">getPackages</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> Arrays.&lt;ReactPackage&gt;asList(</span><br><span class="line">          <span class="keyword">new</span> MainReactPackage(),</span><br><span class="line">          VectorIconsPackage()            </span><br><span class="line">        , <span class="keyword">new</span> VectorIconsPackage()</span><br><span class="line">      );</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h4 id="Send-JS-MSG"><a href="#Send-JS-MSG" class="headerlink" title="Send JS MSG"></a>Send JS MSG</h4><p>Building on <a href="https://stackoverflow.com/a/34740528/383414" target="_blank" rel="noopener">gre’s answer that put me on the right track, but still left me with a lot of work to do</a>, I’ll try to explain some of the missing details.</p>
+<p>There are 2 basic ways to do this:</p>
+<ol>
+<li>use an existing event type</li>
+<li>create &amp; use a custom event type</li>
+</ol>
+<hr>
+<h5 id="Existing-Events"><a href="#Existing-Events" class="headerlink" title="Existing Events"></a>Existing Events</h5><p>As gre mentioned, the React Native docs explain this in the <a href="http://facebook.github.io/react-native/docs/native-components-android.html#events" target="_blank" rel="noopener">Native UI Components section of Events</a>.</p>
+<p>They show how to send the event using the following code:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">WritableMap event = Arguments.createMap();</span><br><span class="line">event.putString(&quot;message&quot;, &quot;MyMessage&quot;);</span><br><span class="line">ReactContext reactContext = (ReactContext)getContext();</span><br><span class="line">reactContext.getJSModule(RCTEventEmitter.class).receiveEvent(</span><br><span class="line">    getId(), &quot;topChange&quot;, event);</span><br></pre></td></tr></table></figure>
+<p>With this explanation:</p>
+<blockquote>
+<p>The event name <code>topChange</code> maps to the <code>onChange</code> callback prop in JavaScript (mappings are in <code>UIManagerModuleConstants.java</code>).</p>
+</blockquote>
+<p>The actual definition from <code>UIManagerModuleConstants.java</code> looks like this:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&quot;topChange&quot;,</span><br><span class="line">    MapBuilder.of(</span><br><span class="line">        &quot;phasedRegistrationNames&quot;,</span><br><span class="line">            MapBuilder.of(</span><br><span class="line">                &quot;bubbled&quot;, &quot;onChange&quot;, </span><br><span class="line">                &quot;captured&quot;, &quot;onChangeCapture&quot;)))</span><br></pre></td></tr></table></figure>
+<p>i.e. by using the event <code>topChange</code> in the Android code, you can intercept it in JS with either <code>onChange</code> or <code>onChangeCapture</code> due to this mapping.</p>
+<p>You can find many other existing events declared in there to piggy-back on.</p>
+<p>There are also “direct” events declared in that may be more useful:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&quot;topLayout&quot;, </span><br><span class="line">    MapBuilder.of(&quot;registrationName&quot;, &quot;onLayout&quot;)</span><br></pre></td></tr></table></figure>
+<p>i.e. Android event <code>topLayout</code> maps to JS event callback <code>onLayout</code></p>
+<p>(<a href="https://stackoverflow.com/questions/44200334/bubbling-vs-direct-events-in-react-native-android-custom-view" target="_blank" rel="noopener">I do not understand the difference between the “bubbled” vs “captured” vs “direct” event types</a>)</p>
+<p>To receive the event in JS, take note of the 3 places <code>_onChange()</code> is referenced in the docs:</p>
+<ol>
+<li>create the callback method: <code>_onChange(event: Event) {}</code></li>
+<li>bind it in the constructor: <code>this._onChange = this._onChange.bind(this);</code></li>
+<li>pass it when creating your custom view: <code>return &lt;RCTMyCustomView {...this.props} onChange={this._onChange} /&gt;;</code></li>
+</ol>
+<hr>
+<h5 id="Custom-Events"><a href="#Custom-Events" class="headerlink" title="Custom Events"></a>Custom Events</h5><p>Custom events need to be declared to the system before they can be used, mapping Android events to JS events in a similar way to how they are done by React Native above.</p>
+<p>This is done by overriding one of the following methods in your <code>ViewManager</code>:</p>
+<ul>
+<li><code>getExportedCustomBubblingEventTypeConstants()</code></li>
+<li><code>getExportedCustomDirectEventTypeConstants()</code></li>
+</ul>
+<p>The javadoc is very helpful in showing how the mapping should work, but I found it useful to reference the React Native code in <code>UIManagerModuleConstants</code> mentioned above.</p>
+<p>Once it is declared there, you use it as you would any other “existing” event.</p>
+<hr>
+<h5 id="Example-Custom-Event-implementation"><a href="#Example-Custom-Event-implementation" class="headerlink" title="Example Custom Event implementation"></a>Example Custom Event implementation</h5><p>I wanted to send the click event from Android up to JS, and to call it <code>onClick</code>. I chose to use a “direct” event for this. I also chose to use the same name in Android and in JS - this is not necessary.</p>
+<p>3 files need to be modified:</p>
+<p><strong>ViewManager class</strong></p>
+<p>This code maps the Android event name “onClick” to the JS function “onClick”.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * This method maps the sending of the &quot;onClick&quot; event to the JS &quot;onClick&quot; function.</span><br><span class="line"> */</span><br><span class="line">@Nullable @Override</span><br><span class="line">public Map&lt;String, Object&gt; getExportedCustomDirectEventTypeConstants() &#123;</span><br><span class="line">    return MapBuilder.&lt;String, Object&gt;builder()</span><br><span class="line">            .put(&quot;onClick&quot;,</span><br><span class="line">                    MapBuilder.of(&quot;registrationName&quot;, &quot;onClick&quot;))</span><br><span class="line">            .build();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>View class</strong></p>
+<p>This code sends an event to the JS when the view is clicked. The name used here is the Android event name, which will map to whatever you set above in the <code>ViewManager</code> class.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// trigger the onPress JS callback</span><br><span class="line">super.setOnClickListener(new OnClickListener() &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void onClick(View v) &#123;</span><br><span class="line">        final Context context = getContext();</span><br><span class="line">        if (context instanceof ReactContext) &#123;</span><br><span class="line">            ((ReactContext) context).getJSModule(RCTEventEmitter.class)</span><br><span class="line">                    .receiveEvent(getId(),</span><br><span class="line">                            &quot;onClick&quot;, null);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>The <code>instanceof</code> check is there because this view is sometimes referenced from native code, outside the React context.</p>
+<p><strong>React Native JS component</strong></p>
+<p>Bind in constructor:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">constructor(props) &#123;</span><br><span class="line">  super(props);</span><br><span class="line">  this.onClick = this.onClick.bind(this);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Declare actual callback function:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">onClick(event: Event) &#123;</span><br><span class="line">  // do something</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Make sure to <a href="https://stackoverflow.com/a/39882563/383414" target="_blank" rel="noopener">set the callback when rendering your view</a>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">render() &#123;</span><br><span class="line">  return &lt;NativeView onClick=&#123;this.onClick&#125; /&gt;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>All very simple when laid out like this, but the documentation of the finer details is scattered around the web.</p>
+<h4 id="使用原生View-addView之后无法显示"><a href="#使用原生View-addView之后无法显示" class="headerlink" title="使用原生View addView之后无法显示"></a>使用原生View addView之后无法显示</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//以下代码修复通过动态 addView 后看不到的问题</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">requestLayout</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">super</span>.requestLayout();</span><br><span class="line">    post(measureAndLayout);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> Runnable measureAndLayout = <span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        measure(</span><br><span class="line">                MeasureSpec.makeMeasureSpec(getWidth(), MeasureSpec.EXACTLY),</span><br><span class="line">                MeasureSpec.makeMeasureSpec(getHeight(), MeasureSpec.EXACTLY));</span><br><span class="line">        layout(getLeft(), getTop(), getRight(), getBottom());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h4 id="react-native的picker无法设置字体大小"><a href="#react-native的picker无法设置字体大小" class="headerlink" title="react native的picker无法设置字体大小"></a>react native的picker无法设置字体大小</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- Base application theme. --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">name</span>=<span class="string">"AppTheme"</span> <span class="attr">parent</span>=<span class="string">"Theme.AppCompat.Light.NoActionBar"</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="xml">    <span class="comment">&lt;!-- Customize your theme here. --&gt;</span></span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="xml">    <span class="comment">&lt;!-- 声明Picker style. --&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:spinnerItemStyle"</span>&gt;</span>@style/SpinnerItem<span class="tag">&lt;/<span class="name">item</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="comment">&lt;!-- 声明Picker.Item style. --&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:spinnerDropDownItemStyle"</span>&gt;</span>@style/SpinnerDropDownItem<span class="tag">&lt;/<span class="name">item</span>&gt;</span></span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="array-remove-item"><a href="#array-remove-item" class="headerlink" title="array remove item"></a>array remove item</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">removeItem(attach) &#123;</span><br><span class="line">        <span class="keyword">this</span>.setState(&#123;</span><br><span class="line">            attachItems: <span class="keyword">this</span>.state.attachItems.filter(<span class="function">(<span class="params">item, index, array</span>) =&gt;</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> item.Url !== attach.Url;</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="IllegalStateException-Cannot-set-request-property-after-connection-is-made"><a href="#IllegalStateException-Cannot-set-request-property-after-connection-is-made" class="headerlink" title="IllegalStateException: Cannot set request property after connection is made"></a>IllegalStateException: Cannot set request property after connection is made</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">release成功后就不报错了</span><br></pre></td></tr></table></figure>
+<h4 id="JS-数组操作方法"><a href="#JS-数组操作方法" class="headerlink" title="JS 数组操作方法"></a>JS 数组操作方法</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">js数组的遍历方法filter()、map()、some()、every()、forEach()、lastIndexOf()、indexOf()</span><br></pre></td></tr></table></figure>
 	  
 
 	  <div>
@@ -124,6 +208,50 @@
 	
 	
 	
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
 	
 		
 			
@@ -188,7 +316,7 @@
 	
 	<li><a href="/"><i class="fa fa-archive"></i>Home</a></li>
 	
-		<li class="next"><a href="/2018/02/05/android-studio-shortcuts/" class="alignright next">next<i class="fa fa-arrow-circle-o-right"></i></a></li>
+		<li class="next"><a href="/2018/05/15/hello-world/" class="alignright next">next<i class="fa fa-arrow-circle-o-right"></i></a></li>
 	
 </ul>
 </div>
@@ -204,7 +332,7 @@
   </div>
   <div class="container-narrow">
 	<footer> <p>
-  &copy; 2018 rex
+  &copy; 2019 rex
   
       with help from <a href="http://zespia.tw/hexo/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-wixo/">Wixo</a>.    
 </p> </footer>
