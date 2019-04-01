@@ -1,0 +1,281 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Android problem | Rex的博客</title>
+  <meta name="author" content="rex">
+  
+  <meta name="description" content="#### 
+TabLayout只有2个tab的时候，没有均分&amp;lt;android.support.design.widget.TabLayout
+    android:id=&amp;quot;@+id/tab&amp;quot;
+    android:layout_width=&amp;quot;match_par">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Android problem"/>
+  <meta property="og:site_name" content="Rex的博客"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="Rex的博客" type="application/atom+xml">
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">  
+  <link rel="stylesheet" href="/css/sidenav.css" media="screen" type="text/css">  
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+
+</head>
+
+<body id="body" data-spy="scroll" data-target=".toc">
+  <div class="container" id="container">
+	<div class="content">
+	  <div class="page-header">		
+  <h1><a class="brand" href="/">Rex的博客</a><span class="split"></span><span class="title">Android problem</span><span class="date" id="title-date"><i class="fa fa-clock-o"></i> 2018-06-07</span></h1>
+</div>		
+
+<div class="row page">
+  <!-- cols -->	
+  
+  
+
+  
+	<div class="col-md-12">
+	  
+
+	  <!-- content -->
+	  <p>#### </p>
+<h2 id="TabLayout只有2个tab的时候，没有均分"><a href="#TabLayout只有2个tab的时候，没有均分" class="headerlink" title="TabLayout只有2个tab的时候，没有均分"></a>TabLayout只有2个tab的时候，没有均分</h2><pre><code>&lt;android.support.design.widget.TabLayout
+    android:id=&quot;@+id/tab&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;wrap_content&quot;
+    android:background=&quot;#f1f1f3&quot;
+    app:tabMaxWidth=&quot;0dp&quot; --------就是这句管用，具体原理可以看源码
+    app:tabGravity=&quot;fill&quot;
+    app:tabIndicatorColor=&quot;#0ca5b1&quot;
+    app:tabMode=&quot;fixed&quot;
+    app:tabSelectedTextColor=&quot;#0ca5b1&quot;
+    app:tabTextAppearance=&quot;@android:style/TextAppearance.Holo.Large&quot;
+    app:tabTextColor=&quot;#777777&quot;&gt;
+&lt;/android.support.design.widget.TabLayout&gt;
+</code></pre><h2 id="dialog显示百度地图被灰色覆盖的问题："><a href="#dialog显示百度地图被灰色覆盖的问题：" class="headerlink" title="dialog显示百度地图被灰色覆盖的问题："></a>dialog显示百度地图被灰色覆盖的问题：</h2><p>TextureMapView 替代mapview，surfaceview有bug</p>
+<p>Android Studio 已经点击下载了，仍然无法查看源代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">重新设置一下Android SDK，重启Android Studio</span><br></pre></td></tr></table></figure>
+<h4 id="Program-type-already-present-android-support-v4-app-BackStackRecord"><a href="#Program-type-already-present-android-support-v4-app-BackStackRecord" class="headerlink" title="Program type already present: android.support.v4.app.BackStackRecord"></a>Program type already present: android.support.v4.app.BackStackRecord</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">包重复, 需要用gradlew app:dependencies查看</span><br></pre></td></tr></table></figure>
+<h4 id="where-are-the-logs"><a href="#where-are-the-logs" class="headerlink" title="where are the logs"></a>where are the logs</h4><p><a href="https://stackoverflow.com/questions/35558637/where-are-gradle-logs" target="_blank" rel="noopener">Where are Gradle logs?</a></p>
+<p><a href="https://stackoverflow.com/questions/49637589/android-studio-3-1-not-showing-build-error-details" target="_blank" rel="noopener">Android Studio 3.1 not showing build error details</a></p>
+<p><a href="https://stackoverflow.com/questions/35842955/manifest-merger-failed-with-multiple-errors-in-android-studio" target="_blank" rel="noopener">Manifest Merger failed with multiple errors in Android Studio</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Manifest merger failed : Attribute application@appComponentFactory value=(android.support.v4.app.CoreComponentFactory) from [com.android.support:support-compat:28.0.0] AndroidManifest.xml:22:18-91</span><br><span class="line">	is also present at [androidx.core:core:1.0.0] AndroidManifest.xml:22:18-86 value=(androidx.core.app.CoreComponentFactory).</span><br><span class="line">	Suggestion: add &apos;tools:replace=&quot;android:appComponentFactory&quot;&apos; to &lt;application&gt; element at AndroidManifest.xml:9:5-105:19 to override.</span><br></pre></td></tr></table></figure>
+<p>根据提示修改后,出现错误:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">	tools:replace specified at line:10 for attribute android:appComponentFactory, but no new value specified</span><br><span class="line">/media/helios/develop/Android/android_qk/hly2/app/src/main/AndroidManifest.xml Error:</span><br><span class="line">	Validation failed, exiting</span><br></pre></td></tr></table></figure>
+<p><a href="https://stackoverflow.com/questions/53268865/android-x-toolsreplace-specified-at-line-for-attribute-but-no-new-value-spec" target="_blank" rel="noopener">Android X: tools:replace specified at line: for attribute, but no new value specified</a></p>
+<p><a href="https://developer.android.com/jetpack/androidx/migrate" target="_blank" rel="noopener">Migrating to AndroidX</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Add below lines to gradle.properties file</span><br><span class="line"></span><br><span class="line">android.useAndroidX=true</span><br><span class="line">android.enableJetifier=true</span><br></pre></td></tr></table></figure>
+<p><a href="https://stackoverflow.com/questions/9045826/text-date-stamp-on-photo" target="_blank" rel="noopener">Text (date) stamp on photo</a></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">Bitmap src = BitmapFactory.decodeResource(getResources(), R.drawable.cuty); <span class="comment">// the original file is cuty.jpg i added in resources</span></span><br><span class="line">       Bitmap dest = Bitmap.createBitmap(src.getWidth(), src.getHeight(), Bitmap.Config.ARGB_8888);</span><br><span class="line"></span><br><span class="line">       SimpleDateFormat sdf = <span class="keyword">new</span> SimpleDateFormat(<span class="string">"yyyy-MM-dd HH:mm:ss"</span>);</span><br><span class="line">       String dateTime = sdf.format(Calendar.getInstance().getTime()); <span class="comment">// reading local time in the system</span></span><br><span class="line"></span><br><span class="line">       Canvas cs = <span class="keyword">new</span> Canvas(dest);</span><br><span class="line">       Paint tPaint = <span class="keyword">new</span> Paint();</span><br><span class="line">       tPaint.setTextSize(<span class="number">35</span>);</span><br><span class="line">       tPaint.setColor(Color.BLUE);</span><br><span class="line">       tPaint.setStyle(Style.FILL);</span><br><span class="line">       cs.drawBitmap(src, <span class="number">0f</span>, <span class="number">0f</span>, <span class="keyword">null</span>);</span><br><span class="line">       <span class="keyword">float</span> height = tPaint.measureText(<span class="string">"yY"</span>);</span><br><span class="line">       cs.drawText(dateTime, <span class="number">20f</span>, height+<span class="number">15f</span>, tPaint);</span><br><span class="line">       <span class="keyword">try</span> &#123;</span><br><span class="line">           dest.compress(Bitmap.CompressFormat.JPEG, <span class="number">100</span>, <span class="keyword">new</span> FileOutputStream(<span class="keyword">new</span> File(<span class="string">"/sdcard/timeStampedImage.jpg"</span>)));</span><br><span class="line">       &#125; <span class="keyword">catch</span> (FileNotFoundException e) &#123;</span><br><span class="line">           <span class="comment">// TODO Auto-generated catch block</span></span><br><span class="line">           e.printStackTrace();</span><br><span class="line">       &#125;</span><br><span class="line">       </span><br><span class="line">       </span><br><span class="line">       &lt;uses-permission android:name=<span class="string">"android.permission.WRITE_EXTERNAL_STORAGE"</span> /&gt;</span><br><span class="line">           </span><br><span class="line">           </span><br><span class="line">           I am getting out of memory exception when i load large image taken from camera, i also tried android:largeHeap=<span class="string">"true"</span> still nothing</span><br></pre></td></tr></table></figure>
+<p><a href="https://stackoverflow.com/questions/53895569/error-duplicate-value-for-resource-attr-orientation-with-config-aapt-v2-a" target="_blank" rel="noopener">error: duplicate value for resource ‘attr/orientation’ with config ‘’ .aapt.v2.Aapt2Exception: Android resource compilation failed</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">merged.dir/values/values.xml:1518: error: duplicate value for resource &apos;attr/orientation</span><br><span class="line"></span><br><span class="line">Just downgrade it to lower version:</span><br><span class="line"></span><br><span class="line">  implementation &apos;androidx.constraintlayout:constraintlayout:2.0.0-alpha2&apos;</span><br></pre></td></tr></table></figure>
+<p>Migrating to AndroidX</p>
+<p><a href="https://developer.android.com/jetpack/androidx/migrate" target="_blank" rel="noopener">google Migrating to AndroidX</a></p>
+<p><a href="https://www.jianshu.com/p/41de8689615d" target="_blank" rel="noopener">jianshu Migrating to AndroidX</a></p>
+<h4 id="Static-interface-methods-are-only-supported-starting-with-Android-N-–min-api-24"><a href="#Static-interface-methods-are-only-supported-starting-with-Android-N-–min-api-24" class="headerlink" title="Static interface methods are only supported starting with Android N (–min-api 24)"></a><a href="https://stackoverflow.com/questions/53402639/static-interface-methods-are-only-supported-starting-with-android-n-min-api-2" target="_blank" rel="noopener">Static interface methods are only supported starting with Android N (–min-api 24)</a></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">This is a common issue and you just need to add</span><br><span class="line"></span><br><span class="line">android &#123;</span><br><span class="line">...</span><br><span class="line">  compileOptions &#123;</span><br><span class="line">        sourceCompatibility JavaVersion.VERSION_1_8</span><br><span class="line">        targetCompatibility JavaVersion.VERSION_1_8</span><br><span class="line">    &#125;</span><br><span class="line">...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="switch-R-id-xxx"><a href="#switch-R-id-xxx" class="headerlink" title="switch R.id.xxx"></a>switch R.id.xxx</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Library project resource identifiers are not constant static final ints, just static ints.</span><br><span class="line"></span><br><span class="line">Convert the code that needs to switch on library resource ids to if-else structures.</span><br></pre></td></tr></table></figure>
+<h4 id="NoSuchFieldError-No-static-field-toolbar"><a href="#NoSuchFieldError-No-static-field-toolbar" class="headerlink" title="NoSuchFieldError: No static field toolbar"></a>NoSuchFieldError: No static field toolbar</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">I had activity_main.xml layout in one of my other modules as well, so I was getting this NoSuchField error. I rename the layout in one of my modules and it worked.</span><br><span class="line"></span><br><span class="line">D/AndroidRuntime: Shutting down VM</span><br><span class="line">E/AndroidRuntime: FATAL EXCEPTION: main</span><br><span class="line">    Process: com.qk.contact, PID: 20043</span><br><span class="line">    java.lang.NoSuchFieldError: No static field toolbar2222 of type I in class Lcom/hly/sos/R$id; or its superclasses (declaration of &apos;com.hly.sos.R$id&apos; appears in /data/app/com.qk.contact-2/base.apk:classes36.dex)</span><br><span class="line">        at com.hly.sos.activity.BaseMainActivity.setContentView(BaseMainActivity.java:71)</span><br><span class="line">        at com.hly.sos.activity.MainActivity.onCreate(MainActivity.java:104)</span><br><span class="line">        at android.app.Activity.performCreate(Activity.java:6355)</span><br><span class="line">        at android.app.Instrumentation.callActivityOnCreate(Instrumentation.java:1108)</span><br><span class="line">        at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:2440)</span><br><span class="line">        at android.app.ActivityThread.handleLaunchActivity(ActivityThread.java:2547)</span><br><span class="line">        at android.app.ActivityThread.access$1100(ActivityThread.java:151)</span><br><span class="line">        at android.app.ActivityThread$H.handleMessage(ActivityThread.java:1398)</span><br><span class="line">        at android.os.Handler.dispatchMessage(Handler.java:102)</span><br><span class="line">        at android.os.Looper.loop(Looper.java:157)</span><br><span class="line">        at android.app.ActivityThread.main(ActivityThread.java:5603)</span><br><span class="line">        at java.lang.reflect.Method.invoke(Native Method)</span><br><span class="line">        at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:774)</span><br><span class="line">        at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:652)</span><br><span class="line">I/Process: Sending signal. PID: 20043 SIG: 9</span><br><span class="line">Application terminated.</span><br></pre></td></tr></table></figure>
+<h4 id="fragment拦截返回键"><a href="#fragment拦截返回键" class="headerlink" title="fragment拦截返回键"></a>fragment拦截返回键</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Fragment中是没有onKeyDown方法的，所以没办法通过已有的方法来处理返回键事件。这里可以通过设置Fragment的contentView为focusable，然后再给它的contentView来设置监听事件来达到拦截的目的.</span><br><span class="line">        view.setFocusableInTouchMode(<span class="keyword">true</span>);</span><br><span class="line">        view.requestFocus();</span><br><span class="line">        view.setOnKeyListener(<span class="keyword">new</span> View.OnKeyListener() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onKey</span><span class="params">(View v, <span class="keyword">int</span> keyCode, KeyEvent event)</span> </span>&#123;</span><br><span class="line">                <span class="keyword">if</span> (event.getAction() == KeyEvent.ACTION_UP &amp;&amp; keyCode == KeyEvent.KEYCODE_BACK)&#123;</span><br><span class="line">                    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br></pre></td></tr></table></figure>
+<h4 id="fragment-添加menu"><a href="#fragment-添加menu" class="headerlink" title="fragment 添加menu"></a>fragment 添加menu</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// 这是关键的一句</span><br><span class="line">@Override</span><br><span class="line">    public void onCreate(Bundle savedInstanceState) &#123;</span><br><span class="line">        super.onCreate(savedInstanceState);</span><br><span class="line">        // 这是关键的一句</span><br><span class="line">        setHasOptionsMenu(true);</span><br><span class="line">        EventBus.getDefault().register(this);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h4 id="android-P-net-work-error"><a href="#android-P-net-work-error" class="headerlink" title="android P net work error"></a><a href="https://blog.csdn.net/yonbor605/article/details/82223882" target="_blank" rel="noopener">android P net work error</a></h4><h4 id="解决recyclerview-的itemview高度会动态变化的时候的绘制问题"><a href="#解决recyclerview-的itemview高度会动态变化的时候的绘制问题" class="headerlink" title="解决recyclerview 的itemview高度会动态变化的时候的绘制问题"></a>解决recyclerview 的itemview高度会动态变化的时候的绘制问题</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">就是item的layout尽量用RelativeLayout包裹</span><br></pre></td></tr></table></figure>
+<h4 id="对自定义的属性加上selector"><a href="#对自定义的属性加上selector" class="headerlink" title="对自定义的属性加上selector"></a>对自定义的属性加上selector</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">protected int[] onCreateDrawableState(int extraSpace) &#123;</span><br><span class="line">    final int[] drawableState = super.onCreateDrawableState(extraSpace + 2);</span><br><span class="line">    if (mIsFried) &#123;</span><br><span class="line">        mergeDrawableStates(drawableState, STATE_FRIED);</span><br><span class="line">    &#125;</span><br><span class="line">    if (mIsBaked) &#123;</span><br><span class="line">        mergeDrawableStates(drawableState, STATE_BAKED);</span><br><span class="line">    &#125;</span><br><span class="line">    return drawableState;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">private static final int[] STATE_FRIED = &#123;R.attr.state_fried&#125;;</span><br><span class="line">private static final int[] STATE_BAKED = &#123;R.attr.state_baked&#125;;</span><br><span class="line"></span><br><span class="line">重写这个就可以了,extraSpace + 2就是有2个自定义属性</span><br></pre></td></tr></table></figure>
+<h4 id="android-library-binary-xml-…"><a href="#android-library-binary-xml-…" class="headerlink" title="android library binary xml ….."></a>android library binary xml …..</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">?selectableItemBackground ==&gt; ?android:selectableItemBackground</span><br><span class="line"></span><br><span class="line">android:background=&quot;?android:selectableItemBackground&quot;</span><br></pre></td></tr></table></figure>
+<h4 id="butterknife-Adapter是内部类-同时ViewHolder是Adapter的内部类时-报错-have-private-access"><a href="#butterknife-Adapter是内部类-同时ViewHolder是Adapter的内部类时-报错-have-private-access" class="headerlink" title="butterknife Adapter是内部类,同时ViewHolder是Adapter的内部类时,报错:have private access"></a>butterknife Adapter是内部类,同时ViewHolder是Adapter的内部类时,报错:have private access</h4><p><a href="https://github.com/JakeWharton/butterknife/issues/198#issuecomment-63871795" target="_blank" rel="noopener">ISSUE</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h4 id="butterknife在module-library使用的时候需要添加插件-并使用R2-switch中使用R-id-xxx"><a href="#butterknife在module-library使用的时候需要添加插件-并使用R2-switch中使用R-id-xxx" class="headerlink" title="butterknife在module library使用的时候需要添加插件,并使用R2,switch中使用R.id.xxx"></a>butterknife在module library使用的时候需要添加插件,并使用R2,switch中使用R.id.xxx</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">apply plugin: &apos;com.jakewharton.butterknife&apos;</span><br><span class="line"></span><br><span class="line"> 注解里面是R2，其他代码还是用R.id.xxx</span><br></pre></td></tr></table></figure>
+<h4 id="jniLibs使用baidumap等自定义文件夹的时候-如果报找不到so文件"><a href="#jniLibs使用baidumap等自定义文件夹的时候-如果报找不到so文件" class="headerlink" title="jniLibs使用baidumap等自定义文件夹的时候,如果报找不到so文件"></a>jniLibs使用baidumap等自定义文件夹的时候,如果报找不到so文件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sourceSet记得设置关联</span><br><span class="line"></span><br><span class="line">invalidate restart</span><br></pre></td></tr></table></figure>
+<h4 id="RecyclerView不显示的问题"><a href="#RecyclerView不显示的问题" class="headerlink" title="RecyclerView不显示的问题"></a>RecyclerView不显示的问题</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">一、RecyclerView和ScrollView嵌套使用出现RecyclerView不显示的问题</span><br><span class="line">首先要确保你从服务端拿到的数据不是空的，</span><br><span class="line"></span><br><span class="line">1.第一种解决方式：</span><br><span class="line">只需要设置ScrollView的属性android:layout_height=&quot;match_parent&quot;   android:fillViewport=&quot;true&quot; 就OK了。</span><br><span class="line"></span><br><span class="line">2. 第二种解决方式：</span><br><span class="line">在RecyclerView外层嵌套一层RelativeLayout布局</span><br><span class="line"></span><br><span class="line">3.RecyclerView使用LayoutManager在setAdapter之前</span><br></pre></td></tr></table></figure>
+<h4 id="aar-依赖问题"><a href="#aar-依赖问题" class="headerlink" title="aar 依赖问题"></a>aar 依赖问题</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://www.cnblogs.com/bluestorm/p/6757999.html</span><br></pre></td></tr></table></figure>
+<h4 id="Program-type-already-present-com-alibaba-android-arouter-routes-ARouter"><a href="#Program-type-already-present-com-alibaba-android-arouter-routes-ARouter" class="headerlink" title="Program type already present: com.alibaba.android.arouter.routes.ARouter"></a>Program type already present: com.alibaba.android.arouter.routes.ARouter</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://blog.csdn.net/young_time/article/details/82713608</span><br></pre></td></tr></table></figure>
+	  
+
+	  <div>
+  		<center>
+		  <div class="pagination">
+<ul class="pagination">
+	
+	
+	
+	
+	
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+			
+		
+	
+		
+			
+			
+			
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+	
+	
+		<li class="prev"><a href="/2018/06/07/android-libs/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>prev</a></li>
+	
+	<li><a href="/"><i class="fa fa-archive"></i>Home</a></li>
+	
+		<li class="next"><a href="/2018/06/07/photo-shop/" class="alignright next">next<i class="fa fa-arrow-circle-o-right"></i></a></li>
+	
+</ul>
+</div>
+
+		</center>
+	  </div>
+	  
+	</div> <!-- col-md-9/col-md-12 -->
+	
+  </div><!-- row -->
+
+	</div>
+  </div>
+  <div class="container-narrow">
+	<footer> <p>
+  &copy; 2019 rex
+  
+      with help from <a href="http://zespia.tw/hexo/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-wixo/">Wixo</a>.    
+</p> </footer>
+  </div> <!-- container-narrow -->
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/jquery.tableofcontents.min.js"></script>
+<script src="/js/tocgenerator.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+
+</body>
+</html>

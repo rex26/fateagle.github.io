@@ -1,0 +1,300 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>android libs | Rex的博客</title>
+  <meta name="author" content="rex">
+  
+  <meta name="description" content="#### 
+#Retrofit添加header参数的几种方法。
+
+使用注解的方式
+
+添加一个Header参数
+public interface UserService {    
+  @Headers(&#34;Cache-Control: max-age=640000&#34;)  
+  @GET(&#34;/tasks">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="android libs"/>
+  <meta property="og:site_name" content="Rex的博客"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="Rex的博客" type="application/atom+xml">
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">  
+  <link rel="stylesheet" href="/css/sidenav.css" media="screen" type="text/css">  
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+
+</head>
+
+<body id="body" data-spy="scroll" data-target=".toc">
+  <div class="container" id="container">
+	<div class="content">
+	  <div class="page-header">		
+  <h1><a class="brand" href="/">Rex的博客</a><span class="split"></span><span class="title">android libs</span><span class="date" id="title-date"><i class="fa fa-clock-o"></i> 2018-06-07</span></h1>
+</div>		
+
+<div class="row page">
+  <!-- cols -->	
+  
+  
+
+  
+	<div class="col-md-12">
+	  
+
+	  <!-- content -->
+	  <p>#### </p>
+<p>#Retrofit添加header参数的几种方法。</p>
+<ul>
+<li><p>使用注解的方式</p>
+<pre>
+添加一个Header参数
+public interface UserService {    
+  @Headers("Cache-Control: max-age=640000")  
+  @GET("/tasks")  
+  Call<list<task>> getTasks();  
+}  
+</list<task></pre>
+</li>
+<li><p>添加多个Header参数</p>
+<pre>
+public interface UserService {    
+  @Headers({  
+      "Accept: application/vnd.yourapi.v1.full+json",  
+      "User-Agent: Your-App-Name"  
+  })  
+  @GET("/tasks/{task_id}")  
+  Call<task> getTask(@Path("task_id") long taskId);  
+}  
+</task></pre>
+</li>
+<li><p>使用代码的方式，则需要使用拦截器</p>
+<pre>
+OkHttpClient.Builder httpClient = new OkHttpClient.Builder();    
+httpClient.addInterceptor(new Interceptor() {    
+    @Override  
+    public Response intercept(Interceptor.Chain chain) throws IOException {  
+        Request original = chain.request();  
+
+        Request request = original.newBuilder()  
+            .header("User-Agent", "Your-App-Name")  
+            .header("Accept", "application/vnd.yourapi.v1.full+json")  
+            .method(original.method(), original.body())  
+            .build();  
+
+        return chain.proceed(request);  
+    }  
+}
+
+OkHttpClient client = httpClient.build();    
+Retrofit retrofit = new Retrofit.Builder()    
+    .baseUrl(API_BASE_URL)  
+    .addConverterFactory(GsonConverterFactory.create())  
+    .client(client)  
+    .build(); 
+</pre>
+</li>
+<li><p>使用注解的方式，但是Header参数每次提交的都不同，也就是动态的Header</p>
+<pre>
+public interface UserService {    
+  @GET("/tasks")  
+  Call<list<task>> getTasks(@Header("Content-Range") String contentRange);  
+}  
+</list<task></pre>
+
+</li>
+</ul>
+<h4 id="Incorrectly-typed-data-found-for-annotation-element-public-abstract-int-butterknife-BindView"><a href="#Incorrectly-typed-data-found-for-annotation-element-public-abstract-int-butterknife-BindView" class="headerlink" title="Incorrectly typed data found for annotation element public abstract int butterknife.BindView"></a>Incorrectly typed data found for annotation element public abstract int butterknife.BindView</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">R2/R文件搞错了.....</span><br></pre></td></tr></table></figure>
+<h4 id="there’s-no-route-matched-ARouter"><a href="#there’s-no-route-matched-ARouter" class="headerlink" title="there’s no route matched ARouter"></a>there’s no route matched ARouter</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">如果什么都正确就检查一下 ,library被引用了没有......</span><br></pre></td></tr></table></figure>
+	  
+
+	  <div>
+  		<center>
+		  <div class="pagination">
+<ul class="pagination">
+	
+	
+	
+	
+	
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+			
+		
+	
+		
+			
+			
+			
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+	
+	
+		<li class="prev"><a href="/2018/06/07/android/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>prev</a></li>
+	
+	<li><a href="/"><i class="fa fa-archive"></i>Home</a></li>
+	
+		<li class="next"><a href="/2018/06/07/android-problem/" class="alignright next">next<i class="fa fa-arrow-circle-o-right"></i></a></li>
+	
+</ul>
+</div>
+
+		</center>
+	  </div>
+	  
+	</div> <!-- col-md-9/col-md-12 -->
+	
+  </div><!-- row -->
+
+	</div>
+  </div>
+  <div class="container-narrow">
+	<footer> <p>
+  &copy; 2019 rex
+  
+      with help from <a href="http://zespia.tw/hexo/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-wixo/">Wixo</a>.    
+</p> </footer>
+  </div> <!-- container-narrow -->
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/jquery.tableofcontents.min.js"></script>
+<script src="/js/tocgenerator.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+
+</body>
+</html>
