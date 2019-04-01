@@ -6,10 +6,12 @@
   <title>j2ee problems | Rex的博客</title>
   <meta name="author" content="rex">
   
-  <meta name="description" content="一般的乱码
-web.xml
+  <meta name="description" content="Idea配置https://www.cnblogs.com/deng-cc/p/6416332.html
+Idea配置tomcathttps://blog.csdn.net/qq_33257527/article/details/79716475
 
-123456789101112&amp;lt;filter&amp;gt;        &amp;lt;filter-name&amp;gt;encodingFilter&amp;lt;/filter-name&amp;gt;        &amp;lt;filter-class&amp;gt;org.springframewo">
+经常容易犯错的地方
+
+123idea导入eclip">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -61,7 +63,13 @@ web.xml
 	  
 
 	  <!-- content -->
-	  <h4 id="一般的乱码"><a href="#一般的乱码" class="headerlink" title="一般的乱码"></a>一般的乱码</h4><ul>
+	  <h4 id="Idea配置"><a href="#Idea配置" class="headerlink" title="Idea配置"></a>Idea配置</h4><p><a href="https://www.cnblogs.com/deng-cc/p/6416332.html" target="_blank" rel="noopener">https://www.cnblogs.com/deng-cc/p/6416332.html</a></p>
+<h3 id="Idea配置tomcat"><a href="#Idea配置tomcat" class="headerlink" title="Idea配置tomcat"></a>Idea配置tomcat</h3><p><a href="https://blog.csdn.net/qq_33257527/article/details/79716475" target="_blank" rel="noopener">https://blog.csdn.net/qq_33257527/article/details/79716475</a></p>
+<blockquote>
+<p>经常容易犯错的地方</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">idea导入eclipse项目的时候可能会自己创建一个web目录然后下面有一个web.xml,</span><br><span class="line">这样导致打开project的时候idea自己根据这个web.xml创建了一个facet，</span><br><span class="line">然后添加tomcat的时候使用这个facet启动后就是404，因为web.xml什么也没有</span><br></pre></td></tr></table></figure>
+<h4 id="一般的乱码"><a href="#一般的乱码" class="headerlink" title="一般的乱码"></a>一般的乱码</h4><ul>
 <li>web.xml</li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;filter&gt;</span><br><span class="line">        &lt;filter-name&gt;encodingFilter&lt;/filter-name&gt;</span><br><span class="line">        &lt;filter-class&gt;org.springframework.web.filter.CharacterEncodingFilter &lt;/filter-class&gt;</span><br><span class="line">        &lt;init-param&gt;</span><br><span class="line">            &lt;param-name&gt;encoding&lt;/param-name&gt;</span><br><span class="line">            &lt;param-value&gt;UTF-8&lt;/param-value&gt;</span><br><span class="line">        &lt;/init-param&gt;</span><br><span class="line">    &lt;/filter&gt;</span><br><span class="line">    &lt;filter-mapping&gt;</span><br><span class="line">        &lt;filter-name&gt;encodingFilter&lt;/filter-name&gt;</span><br><span class="line">        &lt;url-pattern&gt;/*&lt;/url-pattern&gt;</span><br><span class="line">    &lt;/filter-mapping&gt;</span><br></pre></td></tr></table></figure>
@@ -84,6 +92,18 @@ web.xml
 <h4 id="oracle之间传输数据注意点"><a href="#oracle之间传输数据注意点" class="headerlink" title="oracle之间传输数据注意点"></a>oracle之间传输数据注意点</h4><blockquote>
 <p>如果入到频繁出错的情况, 视图放到最后传输, 视图一般牵涉多表</p>
 </blockquote>
+<h4 id="后台异常"><a href="#后台异常" class="headerlink" title="后台异常"></a>后台异常</h4><blockquote>
+<p>可能是因为jsp-api.jar servlet-api.jar和tomcat的冲突了</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">2018</span>-<span class="number">07</span>-<span class="number">25</span> <span class="number">11</span>:<span class="number">58</span>:<span class="number">49</span>,<span class="number">862</span> ERROR [org.apache.struts2.dispatcher.Dispatcher] - Exception occurred during processing request: java.lang.NullPointerException</span><br><span class="line">org.apache.jasper.JasperException: java.lang.NullPointerException</span><br><span class="line">	at org.apache.jasper.servlet.JspServletWrapper.handleJspException(JspServletWrapper.java:<span class="number">541</span>)</span><br><span class="line">	at org.apache.jasper.servlet.JspServletWrapper.service(JspServletWrapper.java:<span class="number">435</span>)</span><br><span class="line">	at org.apache.jasper.servlet.JspServlet.serviceJspFile(JspServlet.java:<span class="number">320</span>)</span><br><span class="line">	at org.apache.jasper.servlet.JspServlet.service(JspServlet.java:<span class="number">266</span>)</span><br><span class="line">	at javax.servlet.http.HttpServlet.service(HttpServlet.java:<span class="number">803</span>)</span><br></pre></td></tr></table></figure>
+<h4 id="jsp问题定位"><a href="#jsp问题定位" class="headerlink" title="jsp问题定位"></a>jsp问题定位</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">java.lang.NullPointerException</span><br><span class="line">    at org.apache.jsp.login.login_jsp._jspService（login_jsp.java:<span class="number">65</span>）</span><br><span class="line">    </span><br><span class="line">原因是/login/login.jsp里面出现了空指针异常，</span><br><span class="line">去掉web.xml里面的<span class="number">500</span>跳转页面可以在浏览器看到报错的打印</span><br></pre></td></tr></table></figure>
+<h4 id="ubuntu-启动关闭tomcat"><a href="#ubuntu-启动关闭tomcat" class="headerlink" title="ubuntu 启动关闭tomcat"></a>ubuntu 启动关闭tomcat</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">./startup.sh </span><br><span class="line"> ./catalina.sh run  （建议用这种启动方式，控制信息可以输出）</span><br><span class="line"> </span><br><span class="line"> ./shutdown.sh</span><br><span class="line"> ps -ef|grep java</span><br></pre></td></tr></table></figure>
+<h4 id="安装docker"><a href="#安装docker" class="headerlink" title="安装docker"></a>安装docker</h4><p><a href="https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-18-04" target="_blank" rel="noopener">tutorial</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -</span><br><span class="line">这个命令如果执行失败了，可以用管道符隔开分两步执行</span><br></pre></td></tr></table></figure>
+<h4 id="10万数据从文件入库"><a href="#10万数据从文件入库" class="headerlink" title="10万数据从文件入库"></a>10万数据从文件入库</h4><p>1.机器内存充足的话，采用mmap进行文件读取<br>2.关闭数据库事务自动提交，一次事务中处理多条记录<br>3.采用多线程进行入库<br>4.如果是离线导入任务，可以先不创建索引，等数据导入后再统一创建索引。<br>5.导入过程关闭bin-log日志</p>
+<p>用poi插件读取</p>
+<p>换成mysql 的heap 存储引擎</p>
+<h4 id="移动端传body"><a href="#移动端传body" class="headerlink" title="移动端传body"></a>移动端传body</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">原生servlet获取</span><br><span class="line">http body通过读取input流可以得到</span><br><span class="line"></span><br><span class="line">br = new BufferedReader(new InputStreamReader((ServletInputStream) request.getInputStream(), &quot;utf-8&quot;));</span><br><span class="line">StringBuffer sb = new StringBuffer(&quot;&quot;);</span><br><span class="line">String temp;</span><br><span class="line">while ((temp = br.readLine()) != null) &#123; </span><br><span class="line">  sb.append(temp);</span><br><span class="line">&#125;</span><br><span class="line">br.close();</span><br><span class="line">params = sb.toString();</span><br><span class="line"></span><br><span class="line">如果传递的是json，得到字符串之后，再反序列化成json对象就可以了</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">springmvc获取</span><br><span class="line">SpringMVC中有一个@RequestBody</span><br><span class="line">注解，就是用来将请求body中的json转换为java对象的，不仅转换普通的java bean，也可以是List，很方便</span><br><span class="line"></span><br><span class="line">@RequestMapping(value = &quot;/query&quot;, method = RequestMethod.POST)</span><br><span class="line">public ModelAndView queryList(@ModelAttribute(&quot;ReportBo&quot;) ReportBo query, </span><br><span class="line">  @RequestBody ReportBo query1, </span><br><span class="line">  HttpServletRequest request) &#123; </span><br><span class="line">  //TODO</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 	  
 
 	  <div>
@@ -98,6 +118,42 @@ web.xml
 	
 		
 			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
+		
+	
+		
+			
 			
 		
 	
@@ -153,9 +209,17 @@ web.xml
 			
 		
 	
+		
+			
+		
+	
+		
+			
+		
 	
 	
-		<li class="prev disabled"><a><i class="fa fa-arrow-circle-o-left"></i>prev</a></li>
+	
+		<li class="prev"><a href="/2018/06/07/photo-shop/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>prev</a></li>
 	
 	<li><a href="/"><i class="fa fa-archive"></i>Home</a></li>
 	
@@ -175,7 +239,7 @@ web.xml
   </div>
   <div class="container-narrow">
 	<footer> <p>
-  &copy; 2018 rex
+  &copy; 2019 rex
   
       with help from <a href="http://zespia.tw/hexo/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-wixo/">Wixo</a>.    
 </p> </footer>
